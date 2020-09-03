@@ -9,11 +9,13 @@
 
 <script>
 import Vue from 'vue'
-import {Tabbar, TabbarItem,NavBar } from 'vant'
+import {Tabbar, TabbarItem,NavBar ,Col, Row } from 'vant'
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
 
+Vue.use(Col);
+Vue.use(Row);
 export default {
   data(){
     return {
