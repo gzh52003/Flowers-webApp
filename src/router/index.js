@@ -1,0 +1,58 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+
+Vue.use(VueRouter)
+
+  const routes = [
+  {
+    path:'/',
+    redirect:{name:'Home'}
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/classification',
+    name: 'Classification',
+    component: () => import( '../views/Classification.vue')
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import( '../views/Cart.vue')
+  },
+  {
+    path: '/mine',
+    name: 'Mine',
+    component: () => import( '../views/Mine.vue')
+  },
+  {
+    path: '/goods',
+    name: 'Goods',
+    component: () => import( '../views/Goods.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import( '../views/Login.vue')
+  },
+  {
+    path: '/reg',
+    name: 'Reg',
+    component: () => import( '../views/Reg.vue')
+  },
+  {
+    path: '/contant',
+    name: 'Contant',
+    component: () => import( '../views/Contant.vue')
+  }
+]
+
+const router = new VueRouter({
+  routes
+})
+
+export default router
