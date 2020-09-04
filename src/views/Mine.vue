@@ -30,7 +30,7 @@
       <div style="padding:10px;padding-right:0">
         <van-row class="mine_bor">
           <van-col span="6" style="font-size:16px">我的订单</van-col>
-          <van-col offset="12" span="6" style="font-size:16px">
+          <van-col offset="12" span="6" style="font-size:16px" @click="all_ding">
             全部订单
             <van-icon name="arrow" />
           </van-col>
@@ -61,7 +61,7 @@
       <div>
         <van-row class="mine_youhui">
           <van-col span="6">
-            <a href="#">
+            <a @click="youhuijuan">
               <i class="iconfont icon-9"></i>
               <p>优惠券</p>
             </a>
@@ -161,6 +161,12 @@ export default {
     },
     reg() {
       this.$router.push("/reg");
+    },
+    all_ding() {
+      this.$router.push("/mine/order");
+    },
+    youhuijuan() {
+      this.$router.push("/mine/coupon");
     },
   },
 };
