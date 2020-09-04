@@ -26,6 +26,11 @@ export default {
 </script>
 
 <style lang='scss'>
+// html,body{
+//   background:#fff;
+//   height:100%;
+//   font-size:37.5px;
+// }
   .search{
     height:46px;
     border-bottom: 2px solid #F1F3F6;

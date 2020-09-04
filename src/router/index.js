@@ -25,6 +25,12 @@ Vue.use(VueRouter)
     component:()=>import('../views/classification/Searching.vue')
   },
   {
+    path:'/list',
+    name:'List',
+    component:()=>import('../views/classification/List.vue')
+
+  },
+  {
     path: '/cart',
     name: 'Cart',
     component: () => import( '../views/Cart.vue')
