@@ -61,7 +61,7 @@
       <div>
         <van-row class="mine_youhui">
           <van-col span="6">
-            <a href="#">
+            <a @click="youhuijuan">
               <i class="iconfont icon-9"></i>
               <p>优惠券</p>
             </a>
@@ -162,6 +162,8 @@ export default {
     reg() {
       this.$router.push("/reg");
     },
+    // 优惠券
+    youhuijuan() {},
   },
 };
 </script>
