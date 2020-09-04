@@ -17,7 +17,12 @@ const routes = [
   {
     path: '/classification',
     name: 'Classification',
-    component: () => import('../views/Classification.vue')
+    component: () => import('../views/classification/Classification.vue')
+  },
+  {
+    path: '/searching',
+    name: 'Searching',
+    component: () => import('../views/classification/Searching.vue')
   },
   {
     path: '/cart',

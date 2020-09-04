@@ -21,6 +21,8 @@ Vue.use(TabbarItem);
 Vue.use(Col);
 Vue.use(Row);
 
+Vue.use(Col);
+Vue.use(Row);
 export default {
   data() {
     return {
