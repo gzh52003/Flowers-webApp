@@ -132,7 +132,7 @@
          <van-grid-item 
          v-for="item in goodsList" 
          :key="item.ItemCode" 
-         to={path:/goods}
+         to='goods'
          :data-id="item.ItemCode"
          class="product-item"
          >

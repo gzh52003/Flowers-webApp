@@ -4,10 +4,10 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
-    path:'/',
-    redirect:{name:'Home'}
+    path: '/',
+    redirect: { name: 'Home' }
   },
   {
     path: '/home',
@@ -17,12 +17,12 @@ Vue.use(VueRouter)
   {
     path: '/classification',
     name: 'Classification',
-    component: () => import( '../views/classification/Classification.vue')
+    component: () => import('../views/classification/Classification.vue')
   },
   {
-    path:'/searching',
-    name:'Searching',
-    component:()=>import('../views/classification/Searching.vue')
+    path: '/searching',
+    name: 'Searching',
+    component: () => import('../views/classification/Searching.vue')
   },
   {
     path:'/list',
@@ -33,32 +33,40 @@ Vue.use(VueRouter)
   {
     path: '/cart',
     name: 'Cart',
-    component: () => import( '../views/Cart.vue')
+    component: () => import('../views/Cart.vue')
   },
   {
     path: '/mine',
     name: 'Mine',
-    component: () => import( '../views/Mine.vue')
+    component: () => import('../views/Mine.vue'),
+  }, {
+    path: '/mine/order',
+    name: 'Order',
+    component: () => import('../views/mine/Order.vue'),
+  }, {
+    path: '/mine/coupon',
+    name: 'Coupon',
+    component: () => import('../views/mine/Coupon.vue'),
   },
   {
     path: '/goods',
     name: 'Goods',
-    component: () => import( '../views/Goods.vue')
+    component: () => import('../views/Goods.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import( '../views/Login.vue')
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/reg',
     name: 'Reg',
-    component: () => import( '../views/Reg.vue')
+    component: () => import('../views/Reg.vue')
   },
   {
     path: '/contant',
     name: 'Contant',
-    component: () => import( '../views/Contant.vue')
+    component: () => import('../views/Contant.vue')
   }
 ]
 
