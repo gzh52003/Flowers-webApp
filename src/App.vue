@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <van-tabbar route active-color="#FF734C" inactive-color="#232628">
+    <van-tabbar route active-color="#FF734C" inactive-color="#232628" v-show="$store.state.common.showTabbar">
       <van-tabbar-item
         :icon="item.icon"
         v-for="item in menu"
@@ -17,6 +17,8 @@ import Vue from 'vue'
 import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading} from 'vant'
 Vue.use(NavBar);
 Vue.use(Tabbar);
+Vue.use(Card);
+Vue.use(Button);
 Vue.use(TabbarItem);
 Vue.use(Tab);
 Vue.use(Tabs);
@@ -57,6 +59,9 @@ export default {
       ],
     };
   },
+  created(){
+    console.log(this.$store);
+  }
 };
 </script>
 
