@@ -10,6 +10,12 @@ export default {
   components: {
     mineheader,
   },
+  created(){
+    this.$store.commit('displayTabbar',false);
+  },
+  destroyed(){
+    this.$store.commit('displayTabbar',true);
+  }
 };
 </script>
 

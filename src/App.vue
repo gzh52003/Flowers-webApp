@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <van-tabbar route active-color="#FF734C" inactive-color="#232628">
+    <van-tabbar route active-color="#FF734C" inactive-color="#232628" v-show="$store.state.common.showTabbar">
       <van-tabbar-item
         :icon="item.icon"
         v-for="item in menu"
@@ -58,6 +58,9 @@ export default {
       ],
     };
   },
+  created(){
+    console.log(this.$store);
+  }
 };
 </script>
 

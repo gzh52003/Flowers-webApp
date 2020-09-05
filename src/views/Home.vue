@@ -42,7 +42,7 @@
         <a href="##"><img src="/img/festival.png" alt="教师节专题"></a>
       </div>
       <div class="festival-product">
-        <div class="festivalCon" v-for="fes in festival" :key="fes.title" :style="fes.backgroud_url">
+        <div class="festivalCon" v-for="fes in festival" :key="fes.title" :style="fes.backgroud_url" @click="gotogoods(fes.title)">
           <p class="title">{{fes.title}}</p>
           <p class="sub_title">{{fes.sub_title}}</p>
           <p class="price">{{fes.price}}</p>
@@ -143,23 +143,171 @@
         </div>
           <van-button class="watchmore" type="default">查看更多</van-button>
       </div>
-      <div class="product">
+      <!-- <div class="product">
         <h3 class="product-title">永生花推荐</h3>
         <div class="product-list">
-          <van-grid :border="false" :column-num="2" class="goodslist">
-            <van-grid-item>
-              <van-image src="https://img01.hua.com/uploadpic/newpic/1073033.jpg_220x240.jpg" />
-              <van-tag plain round type="warning">爱的承诺</van-tag>
-              <h4 class="title" >一生一世·厄瓜多尔进口永生红玫1朵，双色永生绣球</h4>
-              <p class="price">
-                <del>¥198</del>
-                <span>¥259</span>
-              </p>
-              <p>已销售1.3万件</p>
+          <van-grid :border="false" :column-num="2">
+            <van-grid-item class="recommendList">
+              <img src="https://img01.hua.com/uploadpic/newpic/1073033.jpg_220x240.jpg" alt="">
+              <div class="recommendmsg">
+                <p><van-tag round plain type="warning">标签</van-tag></p>
+                <p class="title">一生一世·厄瓜多尔进口永生红玫1朵，双色永生绣球</p>
+                <div class="recommendmsg-price">
+                  <div class="recommendmsg-priceL">
+                    <div class="info-prices"><strong>¥198</strong><del>¥259</del></div>
+                    <p class="info-sales">已销售1.3万件</p>
+                  </div>
+                  <div class="recommendmsg-priceR">
+                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                  </div>
+                </div>
+              </div>
+            </van-grid-item>
+            <van-grid-item  class="recommendList">
+              <van-image src="https://img01.hua.com/uploadpic/newpic/1073287.jpg_220x240.jpg" />
             </van-grid-item>
           </van-grid>
         </div>
+      </div> -->
+      <template>
+        <div class="product">
+        <h3 class="product-title">永生花推荐</h3>
+        <div class="product-list" >
+          <van-grid :border="false" :column-num="2">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods1" :key="recommed.id">
+              <img :src="recommed.img_url" alt="">
+              <div class="recommendmsg">
+                <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
+                <p class="title">{{recommed.Instro}}</p>
+                <div class="recommendmsg-price">
+                  <div class="recommendmsg-priceL">
+                    <div class="info-prices"><strong>¥{{recommed.Price}}</strong><del>¥{{recommed.LinePrice}}</del></div>
+                    <p class="info-sales">已销售{{recommed.Sales}}万件</p>
+                  </div>
+                  <div class="recommendmsg-priceR">
+                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                  </div>
+                </div>
+              </div>
+            </van-grid-item>
+          </van-grid>
+        </div>
+        <van-button class="watchmore" type="default">查看更多</van-button>
       </div>
+      </template>
+      <div class="product">
+        <h3 class="product-title">永生花推荐</h3>
+        <div class="product-list" >
+          <van-grid :border="false" :column-num="2">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods2" :key="recommed.id">
+              <img :src="recommed.img_url" alt="">
+              <div class="recommendmsg">
+                <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
+                <p class="title">{{recommed.Instro}}</p>
+                <div class="recommendmsg-price">
+                  <div class="recommendmsg-priceL">
+                    <div class="info-prices"><strong>¥{{recommed.Price}}</strong><del>¥{{recommed.LinePrice}}</del></div>
+                    <p class="info-sales">已销售{{recommed.Sales}}万件</p>
+                  </div>
+                  <div class="recommendmsg-priceR">
+                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                  </div>
+                </div>
+              </div>
+            </van-grid-item>
+          </van-grid>
+        </div>
+        <van-button class="watchmore" type="default">查看更多</van-button>
+      </div>
+      <div class="product">
+        <h3 class="product-title">永生花推荐</h3>
+        <div class="product-list" >
+          <van-grid :border="false" :column-num="2">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods3" :key="recommed.id">
+              <img :src="recommed.img_url" alt="">
+              <div class="recommendmsg">
+                <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
+                <p class="title">{{recommed.Instro}}</p>
+                <div class="recommendmsg-price">
+                  <div class="recommendmsg-priceL">
+                    <div class="info-prices"><strong>¥{{recommed.Price}}</strong><del>¥{{recommed.LinePrice}}</del></div>
+                    <p class="info-sales">已销售{{recommed.Sales}}万件</p>
+                  </div>
+                  <div class="recommendmsg-priceR">
+                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                  </div>
+                </div>
+              </div>
+            </van-grid-item>
+          </van-grid>
+        </div>
+        <van-button class="watchmore" type="default">查看更多</van-button>
+      </div>
+      <div class="product" style="margin-bottom:0">
+        <h3 class="product-title">永生花推荐</h3>
+        <div class="product-list" >
+          <van-grid :border="false" :column-num="2">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods4" :key="recommed.id">
+              <img :src="recommed.imgurl" alt=""/>
+              <span>{{recommed.img_url}}</span>
+              <div class="recommendmsg">
+                <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
+                <p class="title">{{recommed.Instro}}</p>
+                <div class="recommendmsg-price">
+                  <div class="recommendmsg-priceL">
+                    <div class="info-prices"><strong>¥{{recommed.Price}}</strong><del>¥{{recommed.LinePrice}}</del></div>
+                    <p class="info-sales">已销售{{recommed.Sales}}万件</p>
+                  </div>
+                  <div class="recommendmsg-priceR">
+                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                  </div>
+                </div>
+              </div>
+            </van-grid-item>
+          </van-grid>
+        </div>
+        <van-button class="watchmore" type="default">查看更多</van-button>
+      </div>
+    </div>
+    <div class="tuangou">
+      <img src="https://img02.hua.com/m/home/img/m_home_qiyetuangou.png">
+    </div>
+    <div class="brand">
+      <h3 class="brand-title">为什么选择我们</h3>
+      <div class="brand-list">
+        <van-grid :border="false" :column-num="3">
+          <van-grid-item v-for="value in brand" :key="value.brand_text" :icon="value.brand_url" :text="value.brand_text" size="64"/>
+        </van-grid>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-links">
+        <a class="footer-links-item" href="/qiyetuangou/" title="企业团购">企业团购</a>
+        <a class="footer-links-item" href="/you/" title="设计师款">设计师款</a>
+        <a class="footer-links-item" href="/huadian/" title="同城鲜花">同城鲜花</a>
+        <a class="footer-links-item" href="/huayu/" title="花语大全">花语大全</a>
+      </div>
+      <div class="footer-links" style="padding-top:0;">
+        <a class="footer-links-item" href="/qiyetuangou/" title="花礼优势">花礼优势</a>
+        <a class="footer-links-item" href="/you/" title="勇敢爱">勇敢爱</a>
+        <a class="footer-links-item" href="/huadian/" title="常见问题">常见问题</a>
+        <a class="footer-links-item" href="/huayu/" title="关于我们">关于我们</a>
+      </div>
+      <div class="footer-entry">
+            <div class="footer-entry-item footer-entry-item-appdl">
+                <a href="/mbzzy/" class="navigation">
+                    <i class="iconfont icon-shouji54"></i>
+                    <p>客户端</p>
+                </a>
+            </div>
+            <div class="footer-entry-item">
+                <a href="/chat/" class="navigation">
+                    <i class="iconfont icon-kefu"></i>
+                    <p>客服</p>
+                </a>
+            </div>
+        </div>
+      <p class="footer-copyright">Copyright © 2005~2020 花礼网（中国鲜花礼品网）版权所有<br>中国鲜花网领先品牌，鲜花速递专家！<br>深圳市百易信息技术有限公司  粤ICP备09171662号</p>
     </div>
   </div>
 </template>
@@ -262,13 +410,41 @@ export default {
       }],
       loveFlowers:[],
       forOlder:[],
-      
+      recommendgoods1:[],
+      recommendgoods2:[],
+      recommendgoods3:[],
+      recommendgoods4:[],
+      brand:[{
+        brand_url:'https://img02.hua.com/m/pro_detail/m_details_brand_01.png',
+        brand_text:'获评鲜花龙头企业',
+      },{
+        brand_url:'https://img02.hua.com/m/pro_detail/m_details_brand_02.png',
+        brand_text:'1~3小时送花上门',
+      },{
+        brand_url:'https://img02.hua.com/m/pro_detail/m_details_brand_03.png',
+        brand_text:'赛事冠军花艺师团队',
+      },{
+        brand_url:'https://img02.hua.com/m/pro_detail/m_details_brand_04.png',
+        brand_text:'严选花材',
+      },{
+        brand_url:'https://img02.hua.com/m/pro_detail/m_details_brand_05.png',
+        brand_text:'12道严苛品控标准',
+      },{
+        brand_url:'https://img02.hua.com/m/pro_detail/m_details_brand_06.png',
+        brand_text:'500万用户信赖好评',
+      },]
     }
   },
   methods: {
     gotocart(){
       this.$router.push("/cart");
     },
+    gotogoods(title){
+      console.log(this.$router);
+      this.$router.push(`/goods/${title}`)
+      console.log(title);
+    }
+    ,
     onClickLeft() {
       this.$router.push("/classification");
     },
@@ -284,9 +460,34 @@ export default {
     const {data:forOlder} = await this.$request.post('/goods/list',{
       itemcodes:'9012452,9012092,9012461,9012332,9012072,9010741'
     })
-    console.log(forOlder.data);
-    this.forOlder = forOlder.data
+    this.forOlder = forOlder.data;
+
+    const {data:recommendgoods1} = await this.$request.post('/goods/list',{
+      itemcodes:'1073033,1073287,1073100,1073276'
+    })
+  
+    this.recommendgoods1=recommendgoods1.data
+
+    const {data:recommendgoods2} = await this.$request.post('/goods/list',{
+      itemcodes:'5302071,5602016,5221035,5010040'
+    })
+ 
+    this.recommendgoods2=recommendgoods2.data
+
+    const {data:recommendgoods3} = await this.$request.post('/goods/list',{
+      itemcodes:'1076062,1076113,1061006,1061040'
+    })
+   
+    this.recommendgoods3=recommendgoods3.data
+
+    const {data:recommendgoods4} = await this.$request.post('/goods/list',{
+      itemcodes:'1205050,1207009,1201028,1207010'
+    })
+
+    this.recommendgoods4=recommendgoods4.data
+    
   }
+  
 };
 </script>
 
@@ -298,7 +499,7 @@ html{
   font-size: 16px;
   background: #E9ECF0;
 }
-div,p,h3,h4{
+div,p,h3,h4,span{
  margin:0;
  padding:0
 }
@@ -596,5 +797,154 @@ html{
     width: 175px;
     height: 191px;
   }
+}
+.recommendList{
+  width: 173px;
+  height: 300px;
+   margin-bottom:8px;
+  box-sizing: border-box;
+  box-shadow: 0 8px 9px 0 #e9ecf0;
+  .van-grid-item__content{
+    width: 175px;
+    padding: 0px;
+    justify-content: space-between;
+    img{
+      width: 100%;
+      height: 192px;
+    }
+  }
+  .recommendmsg{
+    width: 175px;
+    height: 110px;
+    box-sizing:border-box;
+    background: #fff;
+    padding:0px 8px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .van-tag{
+      padding: 0 4px;
+    }
+    .title{
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .recommendmsg-price{
+      width: 159px;
+      height: 38px;
+      .recommendmsg-priceL{
+        .info-prices{
+          line-height: 22px;
+          height: 22px;
+          strong {
+            font-size: 18px;
+            color: #FF734C;
+            font-weight: 500;
+          }
+           del {
+            font-size: 10px;;
+            color: #71797F;
+            margin-left:6px;
+          }
+        }
+        .info-sales{
+          font-size:10px;
+          color: #71797F;
+        }
+      }
+      .recommendmsg-priceR{
+        .van-icon{
+          position: absolute;
+          right: 16px;
+          bottom: 26px;
+        }
+      }
+    }
+  }
+}
+.tuangou{
+  width: 100%;
+  height: 125px;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+.brand{
+  width: 100%;
+  height: 272px;
+  background: #fff;
+  .brand-title{
+    font-size: 16px;
+    padding: 20px 0;
+    text-align: center;
+    font-weight: normal;
+  }
+  .brand-list{
+    width: 100%;
+    height: 216px;
+    .van-grid{
+      height: 100%;
+      .van-icon__image{
+        width: 64px;
+        height: 64px;
+      }
+    }
+  }
+}
+.footer{
+  width: 100%;
+  height: 283px;
+  margin-top: 14px;
+  background: #fff;
+  .footer-links{
+    display: flex;
+    padding: 20px 0;
+    .footer-links-item {
+      color: #232628;
+      display: block;
+      flex: 1;
+      padding: 4px 8px;
+      margin: 0 14px;
+      background: #E9ECF0;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .footer-entry{
+    display: flex;
+    justify-content: center;
+    .footer-entry-item{
+      cursor: pointer;
+      color: #232628;
+      text-align: center;
+      .iconfont {
+        display: block;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 50%;
+        background: #E9ECF0;
+        font-size: 20px;
+        color: #232628;
+      }
+      p{
+        font-size: 12px;
+        color: #232628;
+      }
+    }
+    .footer-entry-item + .footer-entry-item {
+      margin-left: 106px;
+    }
+  }
+}
+.footer-copyright {
+    padding: 14px 0;
+    font-size: 12px;
+    color: #B4BABF;
+    text-align: center;
 }
 </style>
