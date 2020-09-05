@@ -9,9 +9,11 @@
 
 <script>
 import Vue from 'vue'
-import {Tabbar, TabbarItem,NavBar } from 'vant'
+import {Tabbar, TabbarItem,NavBar,Card,Button } from 'vant'
 Vue.use(NavBar);
 Vue.use(Tabbar);
+Vue.use(Card);
+Vue.use(Button);
 Vue.use(TabbarItem);
 
 export default {
@@ -43,6 +45,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 
 </style>
