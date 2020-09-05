@@ -1,6 +1,6 @@
 <template>
   <div>
-      <!-- 头部 -->
+    <!-- 头部 -->
     <van-nav-bar :title="listTitle" left-arrow @click-left="quit">
       <template #right>
         <div class="customer-service">
@@ -90,84 +90,117 @@
     <!-- 头部结束 -->
     <!-- 筛选 -->
     <van-row class="filter">
-        <van-col span="6">综合</van-col>
-        <van-col span="6">销量</van-col>
-        <van-col span="6" >价格<i class="filter-item-price"></i></van-col>
-        <van-col span="6">新品</van-col>
+      <van-col span="6">综合</van-col>
+      <van-col span="6">销量</van-col>
+      <van-col span="6">
+        价格
+        <i class="filter-item-price"></i>
+      </van-col>
+      <van-col span="6">新品</van-col>
     </van-row>
     <!-- 筛选结束 -->
     <!--  目的-->
-     <van-row class="purpose">
-        <van-col class="purpose-item"><span>送女友</span></van-col>
-        <van-col class="purpose-item"><span>送男性</span></van-col>
-        <van-col class="purpose-item"><span>送朋友</span></van-col>
-        <van-col class="purpose-item"><span>送长辈</span></van-col>
-        <van-col class="purpose-item"  @click="showPopup"><span>筛选
-            <i class="purpose-last iconfont icon-xia"></i>
-            </span>
-        </van-col>
-        <!-- <van-cell is-link @click="showPopup">展示弹出层</van-cell> -->
-        <!-- <van-popup v-model="show">内容</van-popup> -->
-        <van-popup 
-        v-model="show" 
-        position="right" 
-        :style="{ height: '100%' ,width:'90%'}" 
-        duration='0.2' 
-        class="purpose-layer-content">
-            <div class="purpose-layer-wrap">
-                <h3 class="purpose-layer-title">人群</h3>
-                    <van-row class="purpose-layer-item">
-                        <van-col class="purpose-layer-per" span="8"><span>综合</span></van-col>
-                        <van-col class="purpose-layer-per" span="8"><span>销量</span></van-col>
-                        <van-col class="purpose-layer-per" span="8"><span>新品</span></van-col>
-                    </van-row>
-            </div>
-            <div class="purpose-layer-clear">
-                <a href="#">清除选择</a>
-            </div>
-        </van-popup>
+    <van-row class="purpose">
+      <van-col class="purpose-item">
+        <span>送女友</span>
+      </van-col>
+      <van-col class="purpose-item">
+        <span>送男性</span>
+      </van-col>
+      <van-col class="purpose-item">
+        <span>送朋友</span>
+      </van-col>
+      <van-col class="purpose-item">
+        <span>送长辈</span>
+      </van-col>
+      <van-col class="purpose-item" @click="showPopup">
+        <span>
+          筛选
+          <i class="purpose-last iconfont icon-xia"></i>
+        </span>
+      </van-col>
+      <!-- <van-cell is-link @click="showPopup">展示弹出层</van-cell> -->
+      <!-- <van-popup v-model="show">内容</van-popup> -->
+      <van-popup
+        v-model="show"
+        position="right"
+        :style="{ height: '100%' ,width:'90%'}"
+        duration="0.2"
+        class="purpose-layer-content"
+      >
+        <div class="purpose-layer-wrap">
+          <h3 class="purpose-layer-title">人群</h3>
+          <van-row class="purpose-layer-item">
+            <van-col class="purpose-layer-per" span="8">
+              <span>综合</span>
+            </van-col>
+            <van-col class="purpose-layer-per" span="8">
+              <span>销量</span>
+            </van-col>
+            <van-col class="purpose-layer-per" span="8">
+              <span>新品</span>
+            </van-col>
+          </van-row>
+        </div>
+        <div class="purpose-layer-clear">
+          <a href="#">清除选择</a>
+        </div>
+      </van-popup>
     </van-row>
     <section class="product">
-        <van-grid :column-num="2" class="productList">
-         <van-grid-item 
-         v-for="item in goodsList" 
-         :key="item.ItemCode" 
-         to='goods'
-         :data-id="item.ItemCode"
-         class="product-item"
-         >
-             <div class="product-item-pic">
-                 <img :src="item.img_url" alt="">
-             </div>
-             <div class="product-item-info">
-                 <div class="product-item-info-tages" v-show="item['tag_promo']">
-                     <span>{{item['tag_promo']}}</span>
-                 </div>
-                 <h2 class="product-item-info-name" :class="item['tag_promo']?'text-overflow' : 'text-overflow-line2'">{{item["Cpmc"] +'.'+item.Instro}}</h2>
-                 <div class="product-item-info-bottom">
-                     <p class="product-item-info-prices">
-                         <strong>{{item.LinePrice}} </strong>
-                     </p>
-                 </div>
-             </div>
-         </van-grid-item>
-        </van-grid>
+      <van-grid :column-num="2" class="productList">
+        <van-grid-item
+          v-for="item in goodsList"
+          :key="item.ItemCode"
+          @click="goodsRouter(item.ItemCode)"
+          :data-id="item.ItemCode"
+          class="product-item"
+        >
+          <div class="product-item-pic">
+            <img v-lazy="item.img_url" />
+          </div>
+          <div class="product-item-info">
+            <div class="product-item-info-tages" v-show="item['tag_promo']">
+              <span>{{item['tag_promo']}}</span>
+            </div>
+            <h2
+              class="product-item-info-name"
+              :class="item['tag_promo']?'text-overflow' : 'text-overflow-line2'"
+            >{{item["Cpmc"] +'.'+item.Instro}}</h2>
+            <div class="product-item-info-bottom">
+              <p class="product-item-info-prices">
+                <strong>{{item.LinePrice}}</strong>
+              </p>
+            </div>
+          </div>
+        </van-grid-item>
+      </van-grid>
+      <div class="product-footer">
+          <van-loading size="16px"  type="spinner" color="#1989fa"  v-show="loadingShow">加载中...</van-loading>
+          <p v-show="!loadingShow">已经到底了……</p>
+      </div>
     </section>
   </div>
 </template>
 <script>
-import Vue from 'vue';
-import { Popup } from 'vant';
+import Vue from "vue";
+import { Popup } from "vant";
 Vue.use(Popup);
 export default {
   data() {
     return {
-        //头部标题
+      //头部标题
       listTitle: "爱情鲜花",
       //菜单显示
-      menuShow:false,
-      show:false,
-      goodsList:''
+      menuShow: false,
+      show: false,
+      goodsList: [],
+      loadingShow:true,
+      ajaxStr:'',
+      ajaxPage:1,
+      ajaxSize:6,
+      loadingAjax:false,
+      falg:'',
     };
   },
   methods: {
@@ -176,23 +209,62 @@ export default {
       this.$router.back();
     },
     //菜单
-    menu(){
-        this.menuShow = !this.menuShow
+    menu() {
+      this.menuShow = !this.menuShow;
     },
-       showPopup() {
+    showPopup() {
       this.show = true;
     },
+    goodsRouter($id) {
+      this.$router.push({
+        name: "Goods",
+        params: { $id },
+      });
+    },
     //商品请求
-  async  getGoodsList(){
-        const res = await this.$request.post('http://120.24.63.27:2001/api/goods/list')
-     this.goodsList = res.data.data
-      console.log(res)
+    async getGoodsList() {
+      const res = await this.$request.get(
+        "http://120.24.63.27:2001/api/goods/search",{
+            params:{q:this.ajaxStr,page:this.ajaxPage,size:this.ajaxSize}
+        }
+      );
+      console.log(res);
+      res.data.data.forEach(item=>{
+          this.goodsList.push(item);
+      })
+      console.log(this.goodsList)
+      if(res.data.data.length === 0){
+          this.loadingShow = false
+          this.loadingAjax = true
+          return
+      }
+      this.loadingAjax = false
+      
+    },
+    scrollHandle(){
+        clearTimeout(this.falg)
+        if(this.loadingAjax)return
+        this.falg = setTimeout(()=>{
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            const product_lastTop = document.querySelector('.product-footer').offsetTop
+            const innerHeight = window.innerHeight
+            if((scrollTop +innerHeight) >= product_lastTop ){
+                this.loadingAjax = true
+                this.ajaxPage ++
+                this.getGoodsList()
+            }
+        },500)
     }
+
   },
-  created(){
-     this.getGoodsList()
-     
-    
+  created() {
+   
+    const {q} = this.$route.query
+    this.ajaxStr = q
+    this.getGoodsList()
+  },
+  mounted(){
+        window.addEventListener('scroll', this.scrollHandle);
   }
 };
 </script>
@@ -264,197 +336,205 @@ export default {
   }
 }
 // 筛选
-.filter{
-    background:#fff;
-    border-bottom: 1px solid #E9ECF0;
-    .van-col{
-        height:44px;
-        line-height:44px;
-        text-align:center;
-        font-size:14px;
-        color:#232628;
-        .filter-item-price{
-            position: relative;
-            top:2px;
-            margin-left:4px;
-            &::after,&::before{
-                content: "";
-                display: block;
-                position: absolute;
-                top: -1px;
-                left: 0;
-                width: 0;
-                height: 0;
-                font-size: 0;
-                border: 4px solid transparent;
-
-            }
-            &::before{
-                border-bottom-color: #B4BABF;
-            }
-            &::after{
-                 border-top-color: #B4BABF;
-                top: 8px;
-            }
-        }
+.filter {
+  background: #fff;
+  border-bottom: 1px solid #e9ecf0;
+  .van-col {
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 14px;
+    color: #232628;
+    .filter-item-price {
+      position: relative;
+      top: 2px;
+      margin-left: 4px;
+      &::after,
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -1px;
+        left: 0;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        border: 4px solid transparent;
+      }
+      &::before {
+        border-bottom-color: #b4babf;
+      }
+      &::after {
+        border-top-color: #b4babf;
+        top: 8px;
+      }
     }
+  }
 }
 //目的
-.purpose{
-    padding:10px 4px;
-    background:#fff;
-    .purpose-item{
-        width:20%;
-        padding:4px;
-        float:left;
-        span{
-            max-width: 100%;
-            height: 24px;
-            line-height: 22px;
-            border: 1px solid #F7F9FA;
-            background-color: #F7F9FA;
-            font-size: 12px;
-            -webkit-border-radius: 2px;
-            -moz-border-radius: 2px;
-            border-radius: 2px;
-            text-align: center;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            display:block;
-            .purpose-last{
-                display:inline-block;
-                font-size:8px;
-                width:12px;
-                vertical-align: top;
-            }
+.purpose {
+  padding: 10px 4px;
+  background: #fff;
+  .purpose-item {
+    width: 20%;
+    padding: 4px;
+    float: left;
+    span {
+      max-width: 100%;
+      height: 24px;
+      line-height: 22px;
+      border: 1px solid #f7f9fa;
+      background-color: #f7f9fa;
+      font-size: 12px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      text-align: center;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+      .purpose-last {
+        display: inline-block;
+        font-size: 8px;
+        width: 12px;
+        vertical-align: top;
+      }
+    }
+  }
+}
+.purpose-layer-wrap {
+  padding: 0 14px;
+  .purpose-layer-title {
+    font-weight: 500;
+    color: #232628;
+    padding: 16px 0;
+    font-size: 16px;
+    margin: 0px;
+  }
+  .purpose-layer-item {
+    .purpose-layer-per {
+      margin-bottom: 12px;
+      padding: 0 6px;
+      text-align: center;
+      span {
+        line-height: 34px;
+        border-radius: 2px;
+        border: 1px solid #f7f9fa;
+        font-size: 12px;
+        background-color: #f7f9fa;
+        display: block;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+.purpose-layer-clear {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  text-align: center;
+  background-color: #e9ecf0;
+  color: #232628;
+}
+
+// 商品
+.product {
+  margin-top: 8px;
+}
+.productList {
+  padding: 0 4px;
+}
+.product-item {
+  // width:187px;
+  padding: 0 4px;
+  margin-bottom: 8px;
+
+  .van-grid-item__content {
+    padding: 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px 0 #e9ecf0;
+  }
+  .product-item-pic {
+    height: 187px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      vertical-align: top;
+      border-radius: 4px 4px 0px 0px;
+    }
+  }
+  .product-item-info {
+    height: 58px;
+    padding: 8px 8px 16px;
+    position: relative;
+    .product-item-info-tages {
+      margin-bottom: 4px;
+      font-size: 0px;
+      span {
+        display: inline-block;
+        border-radius: 140px;
+        border: 1px solid #ff734c;
+        padding: 0 4px;
+        color: #ff734c;
+        font-size: 10px;
+      }
+    }
+    .product-item-info-name {
+      font-size: 12px;
+      font-weight: 300;
+      margin: 0px;
+      width: 159.6px;
+    }
+    .product-item-info-bottom {
+      position: absolute;
+      left: 7px;
+      right: 7px;
+      bottom: 16px;
+      z-index: 1;
+      font-size: 14px;
+    }
+    .product-item-info-prices {
+      margin: 0;
+      strong {
+        font-size: 14px;
+        color: #ff734c;
+        font-weight: 500;
+        &::before {
+          content: "￥";
         }
+      }
+    }
+  }
+}
+
+.text-overflow {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.text-overflow-line2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.6;
+}
+.product-footer{
+    text-align:center;
+    height:40px;
+    margin-bottom:50px;
+    p{
+        color: #71797F;
+        font-size: 12px;
     }
 }
-.purpose-layer-wrap{
-    padding:0 14px;
-    .purpose-layer-title{
-        font-weight:500;
-        color:#232628;
-        padding:16px 0;
-        font-size:16px;
-        margin:0px;
-    }
-    .purpose-layer-item{
-        .purpose-layer-per{
-            margin-bottom:12px;
-            padding:0 6px;
-            text-align:center;
-            span{
-                line-height:34px;
-                 border-radius: 2px;
-                border: 1px solid #F7F9FA;
-                font-size:12px;
-                background-color: #F7F9FA;
-                display:block;
-                box-sizing: border-box;
-            }
-        }
-    }
-}
-        .purpose-layer-clear{
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 48px;
-            line-height: 48px;
-            font-size: 16px;
-            text-align: center;
-            background-color: #E9ECF0;
-            color:#232628;
-        }
-
-        // 商品
-        .product{
-            margin-top:8px;
-        }
-        .productList{
-            padding:0 4px;
-        }
-        .product-item{
-            // width:187px;
-            padding:0 4px;
-            margin-bottom:8px;
-
-            .van-grid-item__content{
-                padding:0;
-                border-radius:4px;
-                box-shadow: 0 4px 12px 0 #e9ecf0;
-            }
-            .product-item-pic{
-                height:187px;
-                overflow: hidden;
-                img{
-                    
-                    width:100%;
-                    vertical-align: top;
-                    border-radius: 4px 4px 0px 0px;
-                }
-            }
-            .product-item-info{
-                height:58px;
-                padding:8px 8px 16px ;
-                position:relative;
-                .product-item-info-tages{
-                    margin-bottom:4px;
-                    font-size:0px;
-                    span{
-                        display:inline-block;
-                        border-radius: 140px;
-                        border: 1px solid #FF734C;
-                        padding:0 4px;
-                        color: #FF734C;
-                        font-size:10px;
-                    }
-                }
-                .product-item-info-name{
-                    font-size:12px;
-                    font-weight:300;
-                    margin:0px;
-                    width:159.6px;
-                }
-                .product-item-info-bottom{
-                    position: absolute;
-                    left: 7px;
-                    right: 7px;
-                    bottom: 16px;
-                    z-index: 1;
-                    font-size:14px;
-                }
-                .product-item-info-prices{
-                    margin:0;
-                    strong{
-                        font-size: 14px;
-                        color: #FF734C;
-                        font-weight: 500;
-                        &::before{
-                            content:'￥';
-                        }
-                    }
-                }
-            }
-        }
-
-        .text-overflow{
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-        .text-overflow-line2{
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height:1.6;
-        }
 </style>
