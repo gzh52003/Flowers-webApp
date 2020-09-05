@@ -14,7 +14,7 @@
 
 <script>
 import Vue from 'vue'
-import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem} from 'vant'
+import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Button,Card} from 'vant'
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(Card);
