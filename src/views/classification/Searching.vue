@@ -7,7 +7,7 @@
         placeholder="请输入搜索关键词"
         @search="onSearch"
         :clearable="true"
-        :autofocus="true"
+        autofocus="true"
         clear-trigger="always"
         class="search-header"
         >
@@ -54,8 +54,11 @@ export default {
         },
         //点击搜索
         onSearch(){
-           console.log(this.searchValue,'你好')
-           this.$router.push('/list')
+            const value = this.searchValue
+           this.$router.push({
+               path:'/list',
+               query:{q:value}
+           })
         },
         typeText(evt){
             const e = evt || window.event

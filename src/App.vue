@@ -15,7 +15,7 @@
 
 <script>
 import Vue from 'vue'
-import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Button,Card} from 'vant'
+import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading} from 'vant'
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(Card);
@@ -25,9 +25,10 @@ Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Grid);
 Vue.use(GridItem);
-
+Vue.use(Lazyload);
 Vue.use(Col);
 Vue.use(Row);
+Vue.use(Loading);
 export default {
   data() {
     return {
