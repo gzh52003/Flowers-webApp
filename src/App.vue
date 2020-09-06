@@ -7,6 +7,7 @@
         v-for="item in menu"
         :key="item.name"
         :to="item.path"
+        :badge="item.name==='cart'?cartLength:''"
       >{{item.text}}</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -60,8 +61,13 @@ export default {
       ],
     };
   },
+  computed:{
+    cartLength(){
+      return this.$store.state.cart.goodslist.length;
+    }
+  },
   created(){
-    console.log(this.$store);
+    console.log(this.$store.state);
   }
 };
 </script>
