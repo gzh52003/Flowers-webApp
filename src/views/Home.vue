@@ -51,7 +51,7 @@
       <div class="scene">
         <div class="modetitle">一秒选花</div>
         <van-grid :border="false" :column-num="3" class="songRen">
-          <van-grid-item v-for="song in givePeople" :key="song.song_url" class="songRenCon" style="position:relative">
+          <van-grid-item v-for="song in givePeople" :key="song.song_url" class="songRenCon" style="position:relative" @click="gotoList()">
             <van-image :src="song.songren_url"  />
             <span class="songrentxt">{{song.songren_text}}</span>
           </van-grid-item>
@@ -92,6 +92,7 @@
             :desc="item.Instro"
             :title="item.Cpmc"
             :thumb="item.img_url"
+            @click="gotogoods(item.ItemCode)"
           >
             <template #tags>
               <van-tag round type="warning">{{item.tag_promo}}</van-tag>
@@ -123,6 +124,7 @@
             :desc="item.Instro"
             :title="item.Cpmc"
             :thumb="item.img_url"
+            @click="gotogoods(item.ItemCode)"
           >
             <template #tags>
               <van-tag round type="warning">{{item.tag_promo}}</van-tag>
@@ -143,38 +145,12 @@
         </div>
           <van-button class="watchmore" type="default">查看更多</van-button>
       </div>
-      <!-- <div class="product">
-        <h3 class="product-title">永生花推荐</h3>
-        <div class="product-list">
-          <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList">
-              <img src="https://img01.hua.com/uploadpic/newpic/1073033.jpg_220x240.jpg" alt="">
-              <div class="recommendmsg">
-                <p><van-tag round plain type="warning">标签</van-tag></p>
-                <p class="title">一生一世·厄瓜多尔进口永生红玫1朵，双色永生绣球</p>
-                <div class="recommendmsg-price">
-                  <div class="recommendmsg-priceL">
-                    <div class="info-prices"><strong>¥198</strong><del>¥259</del></div>
-                    <p class="info-sales">已销售1.3万件</p>
-                  </div>
-                  <div class="recommendmsg-priceR">
-                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
-                  </div>
-                </div>
-              </div>
-            </van-grid-item>
-            <van-grid-item  class="recommendList">
-              <van-image src="https://img01.hua.com/uploadpic/newpic/1073287.jpg_220x240.jpg" />
-            </van-grid-item>
-          </van-grid>
-        </div>
-      </div> -->
       <template>
         <div class="product">
         <h3 class="product-title">永生花推荐</h3>
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods1" :key="recommed.id">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods1" :key="recommed.id" @click="gotogoods(recommed.ItemCode)">
               <img :src="recommed.img_url" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
@@ -199,7 +175,7 @@
         <h3 class="product-title">永生花推荐</h3>
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods2" :key="recommed.id">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods2" :key="recommed.id" @click="gotogoods(recommed.ItemCode)">
               <img :src="recommed.img_url" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
@@ -223,7 +199,7 @@
         <h3 class="product-title">永生花推荐</h3>
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods3" :key="recommed.id">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods3" :key="recommed.id" @click="gotogoods(recommed.ItemCode)">
               <img :src="recommed.img_url" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
@@ -247,9 +223,8 @@
         <h3 class="product-title">永生花推荐</h3>
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods4" :key="recommed.id">
-              <img :src="recommed.imgurl" alt=""/>
-              <span>{{recommed.img_url}}</span>
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods4" :key="recommed.id" @click="gotogoods(recommed.ItemCode)">
+              <img :src="recommed.img_url" alt=""/>
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
                 <p class="title">{{recommed.Instro}}</p>
@@ -443,13 +418,15 @@ export default {
       console.log(this.$router);
       this.$router.push(`/goods/${title}`)
       console.log(title);
-    }
-    ,
+    },
     onClickLeft() {
       this.$router.push("/classification");
     },
     onClickRight() {
       this.$router.push("/contant");
+    },
+    gotoList(id){
+      console.log(id);
     }
   },
   async created(){
