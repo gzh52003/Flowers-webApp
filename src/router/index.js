@@ -27,8 +27,8 @@ const routes = [
   {
     path:'/list',
     name:'List',
-    component:()=>import('../views/classification/List.vue')
-
+    component:()=>import('../views/classification/List.vue'),
+      
   },
   {
     path: '/cart',
