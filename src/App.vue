@@ -15,7 +15,7 @@
 
 <script>
 import Vue from 'vue'
-import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading,Search} from 'vant'
+import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading,Search,Card,Button} from 'vant'
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(Card);
@@ -67,7 +67,7 @@ export default {
     }
   },
   created(){
-    console.log(this.$store.state);
+    // console.log(this.$store.state);
   }
 };
 </script>

@@ -180,7 +180,6 @@ export default {
     }
   },
   async created() {
-    
     if(parseInt(this.$route.params.id)){
       const {id} = this.$route.params;
       this.getData(id)
