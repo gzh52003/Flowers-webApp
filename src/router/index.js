@@ -25,6 +25,12 @@ const routes = [
     component: () => import('../views/classification/Searching.vue')
   },
   {
+    path:'/list',
+    name:'List',
+    component:()=>import('../views/classification/List.vue'),
+      
+  },
+  {
     path: '/cart',
     name: 'Cart',
     component: () => import('../views/Cart.vue')
@@ -87,9 +93,14 @@ const routes = [
     component: () => import('../views/mine/connect/intechange.vue'),
   },
   {
-    path: '/goods',
+    path: '/goods/:id',
     name: 'Goods',
-    component: () => import('../views/Goods.vue')
+    component: () => import('../views/goodsdetail/Goods.vue')
+  },
+  {
+    path: '/goods/specifications',
+    name: 'Specifications',
+    component: () => import('../views/goodsdetail/Specifications.vue')
   },
   {
     path: '/login',

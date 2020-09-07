@@ -1,12 +1,18 @@
 <template>
   <div id="app">
     <router-view />
-    <van-tabbar route active-color="#FF734C" inactive-color="#232628">
+    <van-tabbar
+      route
+      active-color="#FF734C"
+      inactive-color="#232628"
+      v-show="$store.state.common.showTabbar"
+    >
       <van-tabbar-item
         :icon="item.icon"
         v-for="item in menu"
         :key="item.name"
         :to="item.path"
+        :badge="item.name==='cart'?cartLength:''"
       >{{item.text}}</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -14,15 +20,34 @@
 
 <script>
 import Vue from "vue";
-import { Tabbar, TabbarItem, NavBar, Col, Row } from "vant";
+import {
+  Tabbar,
+  TabbarItem,
+  NavBar,
+  Col,
+  Row,
+  Tab,
+  Tabs,
+  Grid,
+  GridItem,
+  Lazyload,
+  Loading,
+  Search,
+} from "vant";
 Vue.use(NavBar);
 Vue.use(Tabbar);
+Vue.use(Card);
+Vue.use(Button);
 Vue.use(TabbarItem);
+Vue.use(Tab);
+Vue.use(Tabs);
+Vue.use(Grid);
+Vue.use(GridItem);
+Vue.use(Lazyload);
 Vue.use(Col);
 Vue.use(Row);
-
-Vue.use(Col);
-Vue.use(Row);
+Vue.use(Loading);
+Vue.use(Search);
 export default {
   data() {
     return {
@@ -76,6 +101,14 @@ export default {
       bb = bb.substring(0, bb.length - 1);
       $this.$store.state.userList = bb;
     },
+  },
+  computed: {
+    cartLength() {
+      return this.$store.state.cart.goodslist.length;
+    },
+  },
+  created() {
+    console.log(this.$store.state);
   },
 };
 </script>

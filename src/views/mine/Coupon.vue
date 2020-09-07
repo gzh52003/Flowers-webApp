@@ -71,6 +71,7 @@ export default {
   components: {
     mineheader,
   },
+<<<<<<< HEAD
   data() {
     return {
       active: 0,
@@ -96,6 +97,14 @@ export default {
     //   this.youshow = "true";
     // },
   },
+=======
+  created(){
+    this.$store.commit('displayTabbar',false);
+  },
+  destroyed(){
+    this.$store.commit('displayTabbar',true);
+  }
+>>>>>>> 0a86a585efbfe7345520f0ae511f2dbff1930aff
 };
 </script>
 
