@@ -12,4 +12,26 @@ const store = new Vuex.Store({
     }
 }) 
 
+<<<<<<< HEAD
+export default new Vuex.Store({
+  state: {
+    userList: "",
+    order: 0
+  },
+  mutations: {
+    saveUserList(state, data) {
+      state.userList = data;
+    },
+    changeorder(state, data) {
+      state.order = data
+    }
+  },
+  actions: {
+
+  },
+  modules: {
+  }
+})
+=======
 export default store;
+>>>>>>> 0a86a585efbfe7345520f0ae511f2dbff1930aff

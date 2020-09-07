@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <router-view />
-    <van-tabbar route active-color="#FF734C" inactive-color="#232628" v-show="$store.state.common.showTabbar">
+    <van-tabbar
+      route
+      active-color="#FF734C"
+      inactive-color="#232628"
+      v-show="$store.state.common.showTabbar"
+    >
       <van-tabbar-item
         :icon="item.icon"
         v-for="item in menu"
@@ -15,7 +20,8 @@
 
 <script>
 import Vue from 'vue'
-import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading,Card,Button} from 'vant'
+import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading,Card,Button,Search} from 'vant'
+
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(Card);
@@ -29,6 +35,7 @@ Vue.use(Lazyload);
 Vue.use(Col);
 Vue.use(Row);
 Vue.use(Loading);
+Vue.use(Search);
 export default {
   data() {
     return {
@@ -69,18 +76,35 @@ export default {
       let a = localStorage.getItem('goodslist');
 
       this.$store.commit( 'pushstate',JSON.parse(a));
-    }
+    },
+     saveState() {
+      let $this = this;
+      localStorage.setItem(
+        "state",
+        JSON.stringify($this.$store.state.userList)
+      );
+    },
+
+    readState() {
+      let $this = this;
+      let bb = localStorage.getItem("state").substr(1);
+      bb = bb.substring(0, bb.length - 1);
+      $this.$store.state.userList = bb;
+    },
 
   },
   computed:{
-    cartLength(){
+    cartLength() {
       return this.$store.state.cart.goodslist.length;
-    }
+    },
+
   },
-  created(){
+  created() {
     console.log(this.$store.state);
     window.addEventListener('beforeunload',this.addToStorage);
     window.addEventListener('load',this.addToVux)
+    window.addEventListener("beforeunload", this.saveState);
+    window.addEventListener("load", this.readState);
   },
   
 };

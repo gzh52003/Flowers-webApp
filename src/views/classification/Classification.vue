@@ -48,10 +48,14 @@
               <van-grid-item
                 v-for="key in body.mudiArr"
                 :key="key.img_url"
-                :icon="key.img_url"
-                :text="key.text"
                 class="catebox-details-item"
-              ></van-grid-item>
+                @click="specificGoods($event,idx)"
+              >
+              <template #default>
+                <img :src="key.img_url?key.img_url:''" alt="" :class="key.text?'':'onlyImg'">
+                <p class="catebox-details-item-text" v-if="key.text">{{key.text?key.text:''}}</p>
+              </template>
+              </van-grid-item>
             </van-grid>
           </div>
         </article>
@@ -65,12 +69,12 @@
 
 <script>
 import Vue from "vue";
-import { Search, Sidebar, SidebarItem } from "vant";
+import { Sidebar, SidebarItem } from "vant";
 import date from "./category";
 
 Vue.use(Sidebar);
 Vue.use(SidebarItem);
-Vue.use(Search);
+
 export default {
   data() {
     return {
@@ -86,6 +90,16 @@ export default {
     tabChange(idx) {
       this.idxActive = idx;
     },
+    specificGoods(evt,idx){
+      const e = evt || event
+      let chaField
+      const lastEl = e.currentTarget.lastElementChild
+      chaField = lastEl.innerText ? lastEl.innerText : lastEl.src
+      this.$router.push({
+        path:'/list',
+        query:{specificStr:chaField,index:idx}
+      })
+    }
   },
 };
 </script>
@@ -115,6 +129,7 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100vh - 50px - 46px);
+  background:#fff;
 }
 // 侧边栏
 .sidebar {
@@ -146,6 +161,7 @@ export default {
   right: 0;
   top: 0px;
   bottom: 0px;
+  overflow: auto;
   .catebox-details-mode {
     padding: 12px 12px 44px;
     // display:none;
@@ -193,15 +209,20 @@ export default {
         padding: 8px 0px;
         .van-grid-item__content {
           padding: 0;
-          .van-icon__image {
+          img {
             width: 56px;
             height: 56px;
           }
-          .van-grid-item__text {
+          .onlyImg{
+            width:72px;
+            height:40px;
+          }
+          .catebox-details-item-text {
             font-size: 12px;
             font-weight: 300;
             line-height: 1.3333;
             max-width: 6em;
+            margin:8px auto 0;
             color: #232323;
             overflow: hidden;
             -o-text-overflow: ellipsis;
