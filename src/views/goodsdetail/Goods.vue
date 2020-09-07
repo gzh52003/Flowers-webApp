@@ -19,7 +19,7 @@
         <div class="custom-indicator">{{ current + 1 }}/4</div>
       </template>
     </van-swipe>
-    <div class="goods-proinfo" >
+    <div class="goods-proinfo">
       <div class="goods-proinfo-head-title">
         {{goodsdetailmsg.Instro}}
         <p class="text-orange">{{goodsdetailmsg.Cpmc}}</p>
@@ -43,7 +43,7 @@
 
     <section class="skuselect">
       <div class="media-contain">
-        <div class="media" @click="showGuige">
+        <div class="media" >
           <div class="media-left">已选</div>
           <div class="media-center">韩式/{{goodsdetailmsg.ItemCode}}</div>
           <div class="media-right">
@@ -69,7 +69,12 @@
     <div class="aviodHidden"></div>
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="客服" />
-      <van-goods-action-icon icon="cart-o" text="购物车" :badge="cartlist.length!==0?cartlist.length:''" to="/cart"/>
+      <van-goods-action-icon
+        icon="cart-o"
+        text="购物车"
+        :badge="cartlist.length!==0?cartlist.length:''"
+        to="/cart"
+      />
       <van-goods-action-button
         class="addToCart"
         color="#be99ff"
@@ -77,6 +82,7 @@
         text="加入购物车"
         @click="add2cart"
       />
+
       <van-goods-action-button
         class="buyNow"
         color="#7232dd"
@@ -85,14 +91,13 @@
         @click="buyNow"
       />
     </van-goods-action>
-    <!-- <van-overlay :show="show" @click="show = false" :lock-scroll="true" />
-    <goodsadress v-show="true"></goodsadress>-->
+  
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import {  
+import {
   GoodsAction,
   GoodsActionIcon,
   GoodsActionButton,
@@ -102,8 +107,7 @@ import {
   Area,
   Overlay
 } from "vant";
-// import goodsadress from './GoodsAdress'
-// import specifications from './Specifications'
+
 
 Vue.use(GoodsAction);
 Vue.use(GoodsActionButton);
@@ -113,85 +117,70 @@ Vue.use(Area);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Overlay);
+
 export default {
-  
   data() {
     return {
       current: 0,
       goodsswiper: [],
-      goodsdetailmsg:[],
+      goodsdetailmsg: [],
     };
   },
-  computed:{
-    cartlist(){
-      return this.$store.state.cart.goodslist
+  computed: {
+    cartlist() {
+      return this.$store.state.cart.goodslist;
     }
   },
   methods: {
     onClickLeft() {
-       this.$router.go(-1);
+      this.$router.go(-1);
     },
     onClickRight() {},
     onChange(index) {
       this.current = index;
     },
-    showGuige(){
-      this.show = true;
+    
+   
+    async getData(id) {
+      const { data } = await this.$request.get("/goods/single/" + id);
+      this.goodsdetailmsg = data.data;
+      this.goodsswiper = [{ swiper_url: data.data.img_url }];
     },
-    onBuyClicked(){
-
-    },
-    onAddCartClicked(){
-
-    },
-    async getData(id){
-      const { data } = await this.$request.get("/goods/single/"+id)
-      this.goodsdetailmsg = data.data
-      this.goodsswiper = [{swiper_url:data.data.img_url}]
-    },
-    add2cart(){
-      // 添加当前商品到购物车;
-      // 判断当前商品是否已经存在购物车中
-      // 存在：数量+1
-      // 不存在：添加到购物车
-  
-      const {_id} = this.goodsdetailmsg;
-      console.log(_id);
-      const current = this.cartlist.filter(item=>item._id === _id)[0]
-      console.log(current);
-      if(current){
-        this.$store.commit('changeQty',{_id,qty:current.qty+1})
-      }else{
-        
+    add2cart() {
+      const { _id } = this.goodsdetailmsg;
+      const current = this.cartlist.filter(item => item._id === _id)[0];
+      if (current) {
+        this.$store.commit("changeQty", { _id, qty: current.qty + 1 });
+      } else {
         const goods = {
           ...this.goodsdetailmsg,
-          qty:1
-        }
-        console.log(goods);
-        // 调用mutation方法
-        this.$store.commit('add',goods);
+          qty: 1
+        };
+        
+        this.$store.commit("add", goods);
 
       }
     },
-    buyNow(){
-      // 添加当前商品到购物车，并跳转到购物车页面
+    buyNow() {
+      
       this.add2cart();
-      this.$router.push('/cart')
+      this.$router.push("/cart");
     }
   },
   async created() {
-    
-    if(parseInt(this.$route.params.id)){
-      const {id} = this.$route.params;
-      this.getData(id)
-    }else{
+    if (parseInt(this.$route.params.id)) {
+      const { id } = this.$route.params;
+      this.getData(id);
+    } else {
       const { id: title } = this.$route.params;
-      const data = this.$store.state.common.festival.filter(item => item.title === title);
+      const data = this.$store.state.common.festival.filter(
+        item => item.title === title
+      );
       this.goodsdetailmsg = data[0];
       this.goodsswiper = data[0].fes_swiper;
     }
     this.$store.commit("displayTabbar", false);
-    console.log('source=',this.$request.source)
+    // console.log("source=", this.$request.source);
   },
   destroyed() {
     this.$store.commit("displayTabbar", true);

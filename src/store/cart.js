@@ -3,9 +3,6 @@
 // import {Notify} from 'vant'
 
 const cart = {
-    // 添加命名空间
-    // namespaced:true,
-    // 共享的数据：类似组件中的data
     state:{
         goodslist:[]
     },
@@ -17,7 +14,6 @@ const cart = {
     },
 
     // 定义修改state的事件
-    // 调用：this.$store.commit('add')
     mutations:{
         initCart(state,data){
             state.goodslist = data;
@@ -25,7 +21,6 @@ const cart = {
         // 添加商品到购物车
         add(state,goods){
             state.goodslist.unshift(goods)
-            console.log('add to cart',goods)
         },
 
         // 修改数量
@@ -45,6 +40,9 @@ const cart = {
         remove(state,_id){
             state.goodslist = state.goodslist.filter(item=>item._id!==_id)
         },
+        pushstate(state,data){
+            state.goodslist = data
+        }
         // // 清空购物车
         // clear(state){
         //     state.goodslist = []

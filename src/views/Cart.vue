@@ -17,7 +17,7 @@
       :thumb="item.img_url"
       v-for="item in goodslist"
       :key="item._id"
-      @click-thumb="gotoDetail(item._id)"
+      
     >
       <template #tag>
         <van-checkbox v-model="item.checked"></van-checkbox>
@@ -88,12 +88,10 @@ export default {
   methods:{
     onClickLeft(){
       this.$router.go(-1)
+      
     },
     removeItem(id){
       this.$store.commit('remove',id)
-    },
-    onSubmit(){
-      
     },
     changeQty(id,qty){
       this.$store.commit('changeQty',{_id:id,qty})
@@ -104,16 +102,16 @@ export default {
     gotoDetail(id){
       this.$router.push('/goods/'+id);
     },
-    
-    
   },
   created(){
-    console.log("store123=",this.$store.state.cart.goodslist);
-
-    this.$store.commit('displayTabbar',false);
-  },
-  beforeDestroy(){
     this.$store.commit('displayTabbar',true);
-  }
+  },
+  
 };
 </script>
+
+<style lang="scss">
+  .van-submit-bar{
+    bottom:50px;
+  }
+</style>

@@ -15,7 +15,7 @@
 
 <script>
 import Vue from 'vue'
-import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading} from 'vant'
+import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading,Card,Button} from 'vant'
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(Card);
@@ -60,6 +60,18 @@ export default {
       ],
     };
   },
+  methods:{
+    addToStorage(){
+      let $this=this;
+      localStorage.setItem('goodslist',JSON.stringify($this.$store.state.cart.goodslist))
+    },
+    addToVux(){
+      let a = localStorage.getItem('goodslist');
+
+      this.$store.commit( 'pushstate',JSON.parse(a));
+    }
+
+  },
   computed:{
     cartLength(){
       return this.$store.state.cart.goodslist.length;
@@ -67,7 +79,10 @@ export default {
   },
   created(){
     console.log(this.$store.state);
-  }
+    window.addEventListener('beforeunload',this.addToStorage);
+    window.addEventListener('load',this.addToVux)
+  },
+  
 };
 </script>
 
