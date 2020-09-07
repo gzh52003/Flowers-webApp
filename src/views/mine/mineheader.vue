@@ -1,12 +1,13 @@
 <template>
   <div>
-    <van-nav-bar :title="message" left-arrow @click-left="onClickLeft">
+    <van-nav-bar left-arrow @click-left="onClickLeft">
       <template #left>
         <van-icon name="arrow-left" class="jiantou public_blo" />
       </template>
       <template #right>
         <van-icon name="wap-nav" class="jiantou public_blo" v-show="shower=='true'" />
       </template>
+      <template #title>{{message}}</template>
     </van-nav-bar>
   </div>
 </template>

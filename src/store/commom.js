@@ -64,12 +64,13 @@ const common = {
           }],
     },
     getters:{
-
+      
     },
     mutations:{
         displayTabbar(state,playload){
             state.showTabbar = playload
-        }
+        },
+       
     },
     actions:{
 

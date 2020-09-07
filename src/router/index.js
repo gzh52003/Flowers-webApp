@@ -47,16 +47,55 @@ const routes = [
     path: '/mine/coupon',
     name: 'Coupon',
     component: () => import('../views/mine/Coupon.vue'),
+  }, {
+    path: '/mine/card/buycard',
+    name: 'Buycard',
+    component: () => import('../views/mine/Buycard.vue'),
+  }, {
+    path: '/mine/card',
+    name: 'Card',
+    component: () => import('../views/mine/Card.vue'),
+  },
+  {
+    path: '/mine/balance',
+    name: 'Balance',
+    component: () => import('../views/mine/Balance.vue'),
+  },
+  {
+    path: '/mine/balance/speak',
+    name: 'balaspeak',
+    component: () => import('../views/mine/connect/balaspeak.vue'),
+  },
+  {
+    path: '/mine/balance/mes',
+    name: 'balames',
+    component: () => import('../views/mine/connect/balames.vue'),
+  },
+
+  {
+    path: '/mine/integral',
+    name: 'Integral',
+    component: () => import('../views/mine/Integral.vue'),
+  },
+  {
+    path: '/mine/integral/speak',
+    name: 'intespeak',
+    component: () => import('../views/mine/connect/intespeak.vue'),
+  },
+  {
+    path: '/mine/integral/mes',
+    name: 'intemes',
+    component: () => import('../views/mine/connect/intemes.vue'),
+  },
+  {
+    path: '/mine/integral/change',
+    name: 'intechange',
+    component: () => import('../views/mine/connect/intechange.vue'),
   },
   {
     path: '/goods/:id',
     name: 'Goods',
     component: () => import('../views/goodsdetail/Goods.vue')
-  },
-  {
-    path: '/goods/specifications',
-    name: 'Specifications',
-    component: () => import('../views/goodsdetail/Specifications.vue')
   },
   {
     path: '/login',
@@ -75,8 +114,26 @@ const routes = [
   }
 ]
 
+
+
 const router = new VueRouter({
   routes
 })
 
+
+// router.beforeEach((to, from, next) => {
+//   // console.log(to.path)
+//   if (to.path === '/mine/card') {
+//     next();
+//   } else {
+//     // let token = localStorage.getItem('Authorization');
+//     // console.log(token)
+//     // console.log(this)
+//     // if (token === 'null' || token === '') {
+//     //   next('/login');
+//     // } else {
+//     next();
+//     // }
+//   }
+// });
 export default router

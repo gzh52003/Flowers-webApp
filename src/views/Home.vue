@@ -34,7 +34,7 @@
     </div>
     <van-divider />
     <van-grid column-num="5" :border="false">
-      <van-grid-item v-for="item in flowers" :icon="item.icon" :text="item.text" :key="item.text" to="/goods" />
+      <van-grid-item v-for="(item,idx) in flowers" :icon="item.icon" :text="item.text" :key="item.text" @click="gotoList(item.text,idx)" />
     </van-grid>
     <van-divider />
     <div class="festival">
@@ -50,14 +50,14 @@
       </div>
       <div class="scene">
         <div class="modetitle">一秒选花</div>
-        <van-grid :border="false" :column-num="3" class="songRen">
-          <van-grid-item v-for="song in givePeople" :key="song.song_url" class="songRenCon" style="position:relative" @click="gotoList()">
+        <van-grid :border="false" :column-num="3" class="songRen"> 
+          <van-grid-item v-for="song in givePeople" :key="song.song_url" class="songRenCon" style="position:relative"  @click="gotoList(song.songren_text,1)">
             <van-image :src="song.songren_url"  />
             <span class="songrentxt">{{song.songren_text}}</span>
           </van-grid-item>
         </van-grid>
         <van-grid :border="false" :column-num="4" class="occasion">
-          <van-grid-item v-for="occs in occasion" :key="occs.occasion_url" class="occasionCon" style="position:relative">
+          <van-grid-item v-for="occs in occasion" :key="occs.occasion_url" class="occasionCon" style="position:relative" @click="gotoList(occs.occasion_text,1)">
             <van-image :src="occs.occasion_url"  />
             <span class="occasiontxt" style="font-size:14px;color: #232628; position:absolute;top:10px;">{{occs.occasion_text}}</span>
           </van-grid-item>
@@ -92,7 +92,7 @@
             :desc="item.Instro"
             :title="item.Cpmc"
             :thumb="item.img_url"
-            @click="gotogoods(item.ItemCode)"
+            @click.stop="gotogoods(item.ItemCode)"
           >
             <template #tags>
               <van-tag round type="warning">{{item.tag_promo}}</van-tag>
@@ -107,11 +107,11 @@
               <div class="salesCount">已销售{{item.Sales}}万件</div>
             </template>
             <template #footer>
-              <van-icon class="product-item-cart" name="shopping-cart-o" size="20" @click="gotocart"/>
+              <van-icon class="product-item-cart" name="shopping-cart-o" size="20" @click.stop="gotocart(item._id)"/>
             </template>
           </van-card>
         </div>
-          <van-button class="watchmore" type="default">查看更多</van-button>
+          <van-button class="watchmore" type="default" @click="gotoList('送恋人/爱情鲜花',1)">查看更多</van-button>
       </div>
       <div class="product">
         <h3 class="product-title">送长辈鲜花</h3>
@@ -124,7 +124,7 @@
             :desc="item.Instro"
             :title="item.Cpmc"
             :thumb="item.img_url"
-            @click="gotogoods(item.ItemCode)"
+            @click.stop="gotogoods(item.ItemCode)"
           >
             <template #tags>
               <van-tag round type="warning">{{item.tag_promo}}</van-tag>
@@ -139,18 +139,18 @@
               <div class="salesCount">已销售{{item.Sales}}万件</div>
             </template>
             <template #footer>
-              <van-icon class="product-item-cart" name="shopping-cart-o" size="20" @click="gotocart"/>
+              <van-icon class="product-item-cart" name="shopping-cart-o" size="20" @click.stop="gotocart(item._id)"/>
             </template>
           </van-card>
         </div>
-          <van-button class="watchmore" type="default">查看更多</van-button>
+          <van-button class="watchmore" type="default" @click="gotoList('送恋人/爱情鲜花',1)">查看更多</van-button>
       </div>
       <template>
         <div class="product">
         <h3 class="product-title">永生花推荐</h3>
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods1" :key="recommed.id" @click="gotogoods(recommed.ItemCode)">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods1" :key="recommed._id" @click.stop="gotogoods(recommed.ItemCode)">
               <img :src="recommed.img_url" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
@@ -161,21 +161,21 @@
                     <p class="info-sales">已销售{{recommed.Sales}}万件</p>
                   </div>
                   <div class="recommendmsg-priceR">
-                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                    <van-icon name="shopping-cart-o" size="20px" @click.stop="gotocart(recommed._id)"/>
                   </div>
                 </div>
               </div>
             </van-grid-item>
           </van-grid>
         </div>
-        <van-button class="watchmore" type="default">查看更多</van-button>
+        <van-button class="watchmore" type="default" @click="gotoList('蛋糕推荐',3)">查看更多</van-button>
       </div>
       </template>
       <div class="product">
-        <h3 class="product-title">永生花推荐</h3>
+        <h3 class="product-title">蛋糕推荐</h3>
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods2" :key="recommed.id" @click="gotogoods(recommed.ItemCode)">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods2" :key="recommed.id" @click.stop="gotogoods(recommed.ItemCode)">
               <img :src="recommed.img_url" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
@@ -186,20 +186,20 @@
                     <p class="info-sales">已销售{{recommed.Sales}}万件</p>
                   </div>
                   <div class="recommendmsg-priceR">
-                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                    <van-icon name="shopping-cart-o" size="20px" @click.stop="gotocart(recommed._id)"/>
                   </div>
                 </div>
               </div>
             </van-grid-item>
           </van-grid>
         </div>
-        <van-button class="watchmore" type="default">查看更多</van-button>
+        <van-button class="watchmore" type="default"  @click="gotoList('蛋糕推荐',3)">查看更多</van-button>
       </div>
       <div class="product">
-        <h3 class="product-title">永生花推荐</h3>
+        <h3 class="product-title">礼品推荐</h3>
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods3" :key="recommed.id" @click="gotogoods(recommed.ItemCode)">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods3" :key="recommed._id" @click.stop="gotogoods(recommed.ItemCode)">
               <img :src="recommed.img_url" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
@@ -210,20 +210,20 @@
                     <p class="info-sales">已销售{{recommed.Sales}}万件</p>
                   </div>
                   <div class="recommendmsg-priceR">
-                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                    <van-icon name="shopping-cart-o" size="20px" @click.stop="gotocart(recommed._id)"/>
                   </div>
                 </div>
               </div>
             </van-grid-item>
           </van-grid>
         </div>
-        <van-button class="watchmore" type="default">查看更多</van-button>
+        <van-button class="watchmore" type="default" @click="gotoList('礼品推荐',4)">查看更多</van-button>
       </div>
       <div class="product" style="margin-bottom:0">
-        <h3 class="product-title">永生花推荐</h3>
+        <h3 class="product-title">巧克力推荐</h3>
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
-            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods4" :key="recommed.id" @click="gotogoods(recommed.ItemCode)">
+            <van-grid-item class="recommendList"  v-for="recommed in recommendgoods4" :key="recommed.id" @click.stop="gotogoods(recommed.ItemCode)">
               <img :src="recommed.img_url" alt=""/>
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
@@ -234,14 +234,14 @@
                     <p class="info-sales">已销售{{recommed.Sales}}万件</p>
                   </div>
                   <div class="recommendmsg-priceR">
-                    <van-icon name="shopping-cart-o" size="20px" @click="gotocart"/>
+                    <van-icon name="shopping-cart-o" size="20px" @click.stop="gotocart(recommed._id)"/>
                   </div>
                 </div>
               </div>
             </van-grid-item>
           </van-grid>
         </div>
-        <van-button class="watchmore" type="default">查看更多</van-button>
+        <van-button class="watchmore" type="default" @click="gotoList.stop('巧克力推荐',4)">查看更多</van-button>
       </div>
     </div>
     <div class="tuangou">
@@ -411,13 +411,22 @@ export default {
     }
   },
   methods: {
-    gotocart(){
-      this.$router.push("/cart");
+    async gotocart(id){
+      const {data:dataAll} = await this.$request.post('/goods/list',{
+        itemcodes:'9010966,9012471,9012154,9012450,9012243,9012177,9012474,9012455,9012452,9012092,9012461,9012332,9012072,9010741,1073033,1073287,1073100,1073276,5302071,5602016,5221035,5010040,1076062,1076113,1061006,1061040,1205050,1207009,1201028,1207010'
+      })
+      let one = dataAll.data.filter(item=>item._id === id)[0];
+      const aa = this.$store.state.cart.goodslist.filter(item=>item._id === id)[0]
+      if(aa){
+        this.$store.commit('changeQty',{_id:id,qty:aa.qty+1})
+      }else{
+        this.$store.commit('add',{...one,qty:1})
+      }
     },
     gotogoods(title){
-      console.log(this.$router);
+      // console.log(this.$router);
       this.$router.push(`/goods/${title}`)
-      console.log(title);
+      // console.log(title);
     },
     onClickLeft() {
       this.$router.push("/classification");
@@ -425,8 +434,15 @@ export default {
     onClickRight() {
       this.$router.push("/contant");
     },
-    gotoList(id){
-      console.log(id);
+    gotoList(text,idx){
+      // console.log(11111,text,idx);
+      this.$router.push({
+        name:'List',
+        query:{
+          specificStr:text,
+          index:idx
+        }
+      })
     }
   },
   async created(){
