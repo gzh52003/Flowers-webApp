@@ -12,7 +12,6 @@ const store = new Vuex.Store({
     }
 }) 
 
-<<<<<<< HEAD
 export default new Vuex.Store({
   state: {
     userList: "",
@@ -32,6 +31,3 @@ export default new Vuex.Store({
   modules: {
   }
 })
-=======
-export default store;
->>>>>>> 0a86a585efbfe7345520f0ae511f2dbff1930aff
