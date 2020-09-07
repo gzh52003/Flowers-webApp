@@ -1,15 +1,23 @@
 <template>
-  <div>
-    <van-nav-bar title="登录注册" class="no_bordbot" @click-left="onClickLeft">
+  <div class="reg_vue">
+    <van-nav-bar
+      title="登录注册"
+      class="no_bordbot"
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    >
       <template #right>
-        <van-dropdown-menu :overlay="cuo" :close-on-click-outside="cuo" class="xuanxiang">
+        <!-- <van-dropdown-menu :overlay="cuo" :close-on-click-outside="cuo" class="xuanxiang">
           <van-dropdown-item
             :options="option1"
             title-class="iconfont icon-option"
             title
             @change="change"
           />
-        </van-dropdown-menu>
+        </van-dropdown-menu>-->
+        <van-icon name="wap-nav" class="jiantou public_blo">
+          <listt v-show="isshow=='true'"></listt>
+        </van-icon>
       </template>
       <template #left>
         <van-icon name="arrow-left" class="jiantou" />
@@ -20,7 +28,7 @@
     <van-row>
       <van-col span="6"></van-col>
       <van-col span="12" style="text-aligin:center;padding-top:34px">
-        <img src="\img\wx_login_logo.png" alt style="height:24px;width:100%" />
+        <img src="\img\wx_login_logo.png" alt style="height:24px;width:100%;" />
       </van-col>
     </van-row>
 
@@ -77,7 +85,7 @@
         </van-row>
         <van-row class="reg_bor_bot">
           <van-col>
-            <van-field :clearable="xianshi" v-model="num_you" placeholder="请输入手机号或邮箱" />
+            <van-field :clearable="xianshi" v-model="num_you1" placeholder="请输入手机号或邮箱" />
           </van-col>
         </van-row>
         <van-row>
@@ -86,7 +94,7 @@
         <van-row class="reg_bor_bot">
           <van-col>
             <van-field
-              v-model="password"
+              v-model="password1"
               right-icon="eye"
               @click-right-icon="changepass"
               placeholder="请输入密码"
@@ -109,6 +117,7 @@
           round
           block
           style="margin-top:41px;font-size:17px;color:#fff"
+          @click="denglu1"
         >登录</van-button>
 
         <van-row>
@@ -123,6 +132,8 @@
 import Vue from "vue";
 import { NavBar, DropdownMenu, DropdownItem, Field, Button, Form } from "vant";
 
+import listt from "./mine/publist.vue";
+
 Vue.use(NavBar);
 Vue.use(DropdownMenu);
 Vue.use(DropdownItem);
@@ -130,6 +141,9 @@ Vue.use(Field);
 Vue.use(Button);
 Vue.use(Form);
 export default {
+  components: {
+    listt,
+  },
   data() {
     return {
       value1: 0,
@@ -137,16 +151,13 @@ export default {
       reg_kai: "true",
       number: "",
       yanzheng: "",
+      num_you1: "asdf",
+      password1: "asdfgh",
       num_you: "",
       password: "",
       xianshi: true,
       passtype: "password",
-      option1: [
-        { text: "首页", value: "/home" },
-        { text: "分类", value: "/classification" },
-        { text: "购物车", value: "/cart" },
-        { text: "我的", value: "/mine" },
-      ],
+      isshow: "false",
     };
   },
   methods: {
@@ -178,11 +189,48 @@ export default {
       // console.log("a");
       this.passtype = this.passtype === "password" ? "text" : "password";
     },
+    onClickRight() {
+      // console.log("asd");
+      this.isshow = this.isshow == "false" ? "true" : "false";
+    },
+
+    // 登录
+    denglu1() {
+      let $this = this;
+      let cc = this.password1 + "laoxie";
+
+      let password = this.$md5(cc);
+      this.$request
+        .post("http://120.24.63.27:2001/api/login", {
+          username: this.num_you1,
+          password: password,
+        })
+        .then((res) => {
+          // console.log(res.data);
+          if (res.data.msg == "success") {
+            $this.setCookie(
+              res.data.data.username,
+              res.data.data.authorization,
+              2
+            );
+            $this.$store.commit("saveUserList", res.data.data.username);
+
+            // console.log($this.$store.state.userList);
+
+            this.$router.push("/mine");
+            // console.log(res.data.data);username,authorization
+          }
+        });
+    },
   },
 };
 </script>
 
 <style>
+.reg_vue {
+  background: white;
+  height: 100vh;
+}
 .xuanxiang .van-dropdown-menu__bar {
   box-shadow: 0 0px 0px rgba(100, 101, 102, 0.12);
 }

@@ -54,6 +54,29 @@ export default {
       ],
     };
   },
+  mounted() {
+    // console.log(localStorage.getItem("state"));
+  },
+  created() {
+    window.addEventListener("beforeunload", this.saveState);
+    window.addEventListener("load", this.readState);
+  },
+  methods: {
+    saveState() {
+      let $this = this;
+      localStorage.setItem(
+        "state",
+        JSON.stringify($this.$store.state.userList)
+      );
+    },
+
+    readState() {
+      let $this = this;
+      let bb = localStorage.getItem("state").substr(1);
+      bb = bb.substring(0, bb.length - 1);
+      $this.$store.state.userList = bb;
+    },
+  },
 };
 </script>
 

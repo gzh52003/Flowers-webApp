@@ -4,9 +4,9 @@
     <div>
       <van-tabs v-model="active" title-active-color="orange" color="orange">
         <van-tab title=" 全部"></van-tab>
-        <van-tab title="代付款">内容 2</van-tab>
-        <van-tab title="今日配送">内容 3</van-tab>
-        <van-tab title="待评价">内容 4</van-tab>
+        <van-tab title="代付款"></van-tab>
+        <van-tab title="今日配送"></van-tab>
+        <van-tab title="待评价"></van-tab>
       </van-tabs>
     </div>
 
@@ -16,7 +16,7 @@
       <div class="emtyp">
         <img src="\img\order_empty.png" class="emp_img" alt />
         <div class="emp_not">还没有相关的订单哦...</div>
-        <van-button type="primary" round block class="emp_look">去首页看看</van-button>
+        <van-button type="primary" round block class="emp_look" @click="order_hone">去首页看看</van-button>
       </div>
     </div>
   </div>
@@ -40,8 +40,14 @@ export default {
       active: 0,
     };
   },
+  methods: {
+    order_hone() {
+      this.$router.push("/home");
+    },
+  },
   created() {
     // axios
+    this.active = this.$store.state.order;
     this.$request
       .get("http://120.24.63.27:2001/api/order", {
         params: {},
