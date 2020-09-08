@@ -15,7 +15,7 @@
     <!-- 内容 -->
     <div>
       <p class="youhuijuan">优惠券兑换</p>
-      <div class="juan">
+      <div class="juan" :style="{'height': (105*hhh) + 'px'}">
         <!-- 20 -->
         <div class="juanzi1">
           <van-row class="pp">
@@ -89,18 +89,33 @@
           </van-row>
         </div>
       </div>
+      <!-- 隐藏 -->
+      <div class="more" v-if="int_show" @click="checkmore">
+        查看更多
+        <van-icon name="arrow-down" />
+      </div>
+      <div class="more" v-else @click="shoumore">
+        收起更多
+        <van-icon name="arrow-up" />
+      </div>
+      <p></p>
     </div>
   </div>
 </template>
 
 <script>
 import listt from "../publist.vue";
+import Vue from "vue";
+import { Icon } from "vant";
 
+Vue.use(Icon);
 // Vue.use(Image);
 export default {
   data() {
     return {
       isshow: "false",
+      int_show: true,
+      hhh: 1,
     };
   },
   methods: {
@@ -110,6 +125,16 @@ export default {
     onClickRight() {
       // console.log("asd");
       this.isshow = this.isshow == "false" ? "true" : "false";
+    },
+    // 查看更多
+    checkmore() {
+      this.int_show = false;
+      this.hhh = 4;
+    },
+    // 收起更多
+    shoumore() {
+      this.int_show = true;
+      this.hhh = 1;
     },
   },
   components: {
@@ -122,6 +147,9 @@ export default {
 .bspeak {
   background: #f7f7f7;
   height: 100vh;
+}
+.public_blo {
+  color: #000;
 }
 .youhuijuan {
   margin: 0;
@@ -139,7 +167,9 @@ export default {
   padding: 5px;
   font-size: 12px;
   color: #fff;
+  transition: 1s;
   /* box-sizing: border-box; */
+  overflow: hidden;
   background: #fff;
 }
 .juanzi1 {
@@ -201,5 +231,11 @@ export default {
 }
 .pp1 .newnew {
   font-size: 24px;
+}
+.more {
+  color: #bcbcbc;
+  text-align: center;
+  font-size: 12px;
+  background: #fff;
 }
 </style>

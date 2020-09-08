@@ -47,7 +47,7 @@ export default {
   },
   created() {
     // axios
-    this.active = this.$store.state.order;
+    this.$store.commit("displayTabbar", false);
     this.$request
       .get("http://120.24.63.27:2001/api/order", {
         params: {},
@@ -55,6 +55,9 @@ export default {
       .then((res) => {
         console.log(res.data);
       });
+  },
+  destroyed() {
+    this.$store.commit("displayTabbar", true);
   },
 };
 </script>
