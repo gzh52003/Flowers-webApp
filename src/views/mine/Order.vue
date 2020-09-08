@@ -21,10 +21,7 @@
     </div>
   </div>
 </template>
-<<<<<<< HEAD
  
-=======
->>>>>>> 2231dc634a22a410b7c9f3729312caad2f71a5a6
 <script>
 import Vue from "vue";
 // import axios from "axios";
