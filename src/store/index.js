@@ -6,13 +6,10 @@ import common from './commom'
 Vue.use(Vuex)
 const store = new Vuex.Store({
   // store模块化
-    modules:{
-      cart,
-      common
-    }
-}) 
-
-export default new Vuex.Store({
+  modules: {
+    cart,
+    common
+  },
   state: {
     userList: "",
     order: 0
@@ -28,6 +25,6 @@ export default new Vuex.Store({
   actions: {
 
   },
-  modules: {
-  }
 })
+
+export default store
