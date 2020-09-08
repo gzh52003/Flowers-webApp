@@ -8,7 +8,9 @@
         <img src="https://m.hua.com/content/vue/login/static/img/m_hualogo.png" alt />
       </template>
       <template #right>
-        <i class="iconfont icon-option" style="font-size:16px;color:#232628"></i>
+        <i class="iconfont icon-option" style="font-size:16px;color:#232628">
+          <listt class="headerRight" v-show="isshow=='true'"></listt>
+        </i>
       </template>
     </van-nav-bar>
     <van-swipe class="my-swipe" @change="onChange">
@@ -107,7 +109,7 @@ import {
   Area,
   Overlay
 } from "vant";
-
+import listt from "../mine/publist";
 
 Vue.use(GoodsAction);
 Vue.use(GoodsActionButton);
@@ -119,11 +121,15 @@ Vue.use(SwipeItem);
 Vue.use(Overlay);
 
 export default {
+  components: {
+    listt,
+  },
   data() {
     return {
       current: 0,
       goodsswiper: [],
       goodsdetailmsg: [],
+      isshow: "false",
     };
   },
   computed: {
@@ -135,7 +141,9 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
-    onClickRight() {},
+    onClickRight() {
+      this.isshow = this.isshow == "false" ? "true" : "false";
+    },
     onChange(index) {
       this.current = index;
     },
@@ -279,5 +287,8 @@ export default {
 .aviodHidden {
   width: 100%;
   height: 50px;
+}
+.headerRight{
+  top:45px!important;
 }
 </style>

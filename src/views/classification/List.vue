@@ -580,7 +580,7 @@ export default {
 }
 .product-item {
   // width:187px;
-  padding: 0 4px;
+  // padding: 0 4px;
   margin-bottom: 8px;
 
   .van-grid-item__content {
