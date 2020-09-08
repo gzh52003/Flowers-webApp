@@ -18,21 +18,17 @@ const store = new Vuex.Store({
     saveUserList(state, data) {
       state.userList = data;
     },
-    state: {
-      userList: "",
-      order: 0
-    },
 
 
     changeorder(state, data) {
       state.order = data
     },
 
-    actions: {
 
-    },
+  },
+  actions: {
 
-  }
+  },
 
 
 })
