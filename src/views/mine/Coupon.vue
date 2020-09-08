@@ -96,12 +96,12 @@ export default {
     //   this.youshow = "true";
     // },
   },
-  created(){
-    this.$store.commit('displayTabbar',false);
+  created() {
+    this.$store.commit("displayTabbar", false);
   },
-  destroyed(){
-    this.$store.commit('displayTabbar',true);
-  }
+  destroyed() {
+    this.$store.commit("displayTabbar", true);
+  },
 };
 </script>
 

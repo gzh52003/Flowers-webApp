@@ -45,7 +45,7 @@
 
     <section class="skuselect">
       <div class="media-contain">
-        <div class="media" >
+        <div class="media">
           <div class="media-left">已选</div>
           <div class="media-center">韩式/{{goodsdetailmsg.ItemCode}}</div>
           <div class="media-right">
@@ -93,7 +93,6 @@
         @click="buyNow"
       />
     </van-goods-action>
-  
   </div>
 </template>
 
@@ -107,7 +106,7 @@ import {
   SwipeItem,
   Sku,
   Area,
-  Overlay
+  Overlay,
 } from "vant";
 import listt from "../mine/publist";
 
@@ -135,7 +134,7 @@ export default {
   computed: {
     cartlist() {
       return this.$store.state.cart.goodslist;
-    }
+    },
   },
   methods: {
     onClickLeft() {
@@ -147,8 +146,7 @@ export default {
     onChange(index) {
       this.current = index;
     },
-    
-   
+
     async getData(id) {
       const { data } = await this.$request.get("/goods/single/" + id);
       this.goodsdetailmsg = data.data;
@@ -156,24 +154,22 @@ export default {
     },
     add2cart() {
       const { _id } = this.goodsdetailmsg;
-      const current = this.cartlist.filter(item => item._id === _id)[0];
+      const current = this.cartlist.filter((item) => item._id === _id)[0];
       if (current) {
         this.$store.commit("changeQty", { _id, qty: current.qty + 1 });
       } else {
         const goods = {
           ...this.goodsdetailmsg,
-          qty: 1
+          qty: 1,
         };
-        
-        this.$store.commit("add", goods);
 
+        this.$store.commit("add", goods);
       }
     },
     buyNow() {
-      
       this.add2cart();
       this.$router.push("/cart");
-    }
+    },
   },
   async created() {
     if (parseInt(this.$route.params.id)) {
@@ -182,7 +178,7 @@ export default {
     } else {
       const { id: title } = this.$route.params;
       const data = this.$store.state.common.festival.filter(
-        item => item.title === title
+        (item) => item.title === title
       );
       this.goodsdetailmsg = data[0];
       this.goodsswiper = data[0].fes_swiper;
@@ -192,7 +188,7 @@ export default {
   },
   destroyed() {
     this.$store.commit("displayTabbar", true);
-  }
+  },
 };
 </script>
 

@@ -32,11 +32,10 @@ import {
   GridItem,
   Lazyload,
   Loading,
+  Search,
   Card,
   Button,
-  Search,
 } from "vant";
-
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(Card);

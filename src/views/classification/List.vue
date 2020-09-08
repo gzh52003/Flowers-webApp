@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <van-nav-bar left-arrow @click-left="quit">
       <template #title>
-        <p v-show="searchShow">爱情鲜花</p>
+        <p v-show="searchShow" v-text="titleStr">爱情鲜花</p>
         <van-search
           v-model="titleStr"
           v-show="!searchShow"
@@ -242,13 +242,12 @@ export default {
     goodsRouter($id) {
       this.$router.push({
         name: "Goods",
-        params: { $id },
+        params: { id:$id },
       });
     },
     onSearch() {
-      console.log(this.titleStr);
       this.ajaxPage = 1;
-      this.searchGoodsList();
+      this.getGoodsList();
     },
     //商品请求
     async getGoodsList() {
@@ -267,8 +266,7 @@ export default {
     
         res = await this.$request.post("/goods/list", {
           itemcodes:this.goodsItem,
-          page: this.ajaxPage,
-          size: this.ajaxSize,
+         
         });
       }
       //判断当前是重新搜索还是继续加载
@@ -318,7 +316,7 @@ export default {
     comprehensive() {
       this.ajaxPage = 1;
       this.field = "";
-      this.this.getGoodsList()();
+      this.getGoodsList()();
     },
     //销量
     salesVolume() {
@@ -342,10 +340,11 @@ export default {
   beforeRouteEnter(to, from, next) {
     if (from.path === "/searching") {
       window.searchShow = true;
-    }
+    } 
     next();
   },
-  created() {
+  async created() {
+
     const { q, specificStr, index } = this.$route.query;
     if (q) {
       if (window.searchShow) {
@@ -355,6 +354,7 @@ export default {
       this.getGoodsList();
     }
     if (specificStr) {
+        
             let strItem = ''
           for(let i = 0; i < itemsArr[index - 0].length;i++){
               strItem += ','+itemsArr[index - 0][i] 

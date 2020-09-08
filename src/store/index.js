@@ -20,11 +20,11 @@ const store = new Vuex.Store({
     },
     changeorder(state, data) {
       state.order = data
-    }
+    },
   },
-  actions: {
-
-  },
+      actions: {
+  
+      },
 }) 
 
 // export default new Vuex.Store({
@@ -47,4 +47,5 @@ const store = new Vuex.Store({
 //   }
 // })
 
-export default store;
+
+export default store
