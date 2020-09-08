@@ -21,7 +21,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import Vue from "vue";
 // import axios from "axios";
@@ -47,11 +46,8 @@ export default {
   },
   created() {
     // axios
-<<<<<<< HEAD
     this.active = this.$store.state.order;
-=======
     this.$store.commit('displayTabbar',false);
->>>>>>> 0a86a585efbfe7345520f0ae511f2dbff1930aff
     this.$request
       .get("http://120.24.63.27:2001/api/order", {
         params: {},

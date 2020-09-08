@@ -19,13 +19,23 @@
 </template>
 
 <script>
-import Vue from 'vue'
-<<<<<<< HEAD
-import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading,Search,Card,Button} from 'vant'
-=======
-import {Tabbar, TabbarItem,NavBar ,Col, Row ,Tab,Tabs,Grid,GridItem,Lazyload,Loading,Card,Button,Search} from 'vant'
-
->>>>>>> a129baf85fe7b84d57f25870e8ccb6af65e747a8
+import Vue from "vue";
+import {
+  Tabbar,
+  TabbarItem,
+  NavBar,
+  Col,
+  Row,
+  Tab,
+  Tabs,
+  Grid,
+  GridItem,
+  Lazyload,
+  Loading,
+  Search,
+  Card,
+  Button,
+} from "vant";
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(Card);
@@ -71,17 +81,20 @@ export default {
       ],
     };
   },
-  methods:{
-    addToStorage(){
-      let $this=this;
-      localStorage.setItem('goodslist',JSON.stringify($this.$store.state.cart.goodslist))
+  methods: {
+    addToStorage() {
+      let $this = this;
+      localStorage.setItem(
+        "goodslist",
+        JSON.stringify($this.$store.state.cart.goodslist)
+      );
     },
-    addToVux(){
-      let a = localStorage.getItem('goodslist');
+    addToVux() {
+      let a = localStorage.getItem("goodslist");
 
-      this.$store.commit( 'pushstate',JSON.parse(a));
+      this.$store.commit("pushstate", JSON.parse(a));
     },
-     saveState() {
+    saveState() {
       let $this = this;
       localStorage.setItem(
         "state",
@@ -95,28 +108,19 @@ export default {
       bb = bb.substring(0, bb.length - 1);
       $this.$store.state.userList = bb;
     },
-
   },
-  computed:{
+  computed: {
     cartLength() {
       return this.$store.state.cart.goodslist.length;
     },
-
   },
-<<<<<<< HEAD
-  created(){
-    // console.log(this.$store.state);
-  }
-=======
   created() {
     console.log(this.$store.state);
-    window.addEventListener('beforeunload',this.addToStorage);
-    window.addEventListener('load',this.addToVux)
+    window.addEventListener("beforeunload", this.addToStorage);
+    window.addEventListener("load", this.addToVux);
     window.addEventListener("beforeunload", this.saveState);
     window.addEventListener("load", this.readState);
   },
-  
->>>>>>> a129baf85fe7b84d57f25870e8ccb6af65e747a8
 };
 </script>
 

@@ -168,17 +168,10 @@ export default {
     }
   },
   async created() {
-<<<<<<< HEAD
-    if(parseInt(this.$route.params.id)){
-      const {id} = this.$route.params;
-      this.getData(id)
-    }else{
-=======
     if (parseInt(this.$route.params.id)) {
       const { id } = this.$route.params;
       this.getData(id);
     } else {
->>>>>>> a129baf85fe7b84d57f25870e8ccb6af65e747a8
       const { id: title } = this.$route.params;
       const data = this.$store.state.common.festival.filter(
         item => item.title === title
