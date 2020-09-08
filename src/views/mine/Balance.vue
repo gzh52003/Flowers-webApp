@@ -65,6 +65,12 @@ export default {
   components: {
     listt,
   },
+  created(){
+    this.$store.commit("displayTabbar", false);
+  },
+  destroyed() {
+    this.$store.commit("displayTabbar", true);
+  },
 };
 </script>
 <style scoped >

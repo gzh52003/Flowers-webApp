@@ -74,6 +74,12 @@ export default {
       this.$router.push("/mine/integral/change");
     },
   },
+  created(){
+    this.$store.commit("displayTabbar", false);
+  },
+  destroyed() {
+    this.$store.commit("displayTabbar", true);
+  },
   components: {
     listt,
   },

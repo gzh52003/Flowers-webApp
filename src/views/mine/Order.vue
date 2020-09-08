@@ -4,7 +4,7 @@
     <div>
       <van-tabs v-model="active" title-active-color="orange" color="orange">
         <van-tab title=" 全部"></van-tab>
-        <van-tab title="代付款"></van-tab>
+        <van-tab title="待付款"></van-tab>
         <van-tab title="今日配送"></van-tab>
         <van-tab title="待评价"></van-tab>
       </van-tabs>

@@ -30,6 +30,12 @@ export default {
       this.$router.go(-1);
     },
   },
+  created(){
+    this.$store.commit("displayTabbar", false);
+  },
+  destroyed() {
+    this.$store.commit("displayTabbar", true);
+  },
 };
 </script>
 

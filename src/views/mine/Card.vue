@@ -25,6 +25,12 @@ export default {
       this.$router.push("/mine/card/buycard");
     },
   },
+  created(){
+    this.$store.commit("displayTabbar", false);
+  },
+  destroyed() {
+    this.$store.commit("displayTabbar", true);
+  },
 };
 </script>
 
