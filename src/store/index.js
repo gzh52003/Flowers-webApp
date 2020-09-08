@@ -9,7 +9,22 @@ const store = new Vuex.Store({
     modules:{
       cart,
       common
+    },
+      state: {
+    userList: "",
+    order: 0
+  },
+  mutations: {
+    saveUserList(state, data) {
+      state.userList = data;
+    },
+    changeorder(state, data) {
+      state.order = data
     }
+  },
+  actions: {
+
+  },
 }) 
 
 // export default new Vuex.Store({
