@@ -8,7 +8,9 @@
         购物车
       </template>
       <template #right>
-        <i class="iconfont icon-option" style="font-size:16px;color:#232628"></i>
+        <i class="iconfont icon-option" style="font-size:16px;color:#232628">
+          <listt class="headerRight" v-show="isshow=='true'"></listt>
+        </i>
       </template>
     </van-nav-bar>
       <van-card
@@ -34,7 +36,7 @@
         <van-button plain size="mini" type="danger" icon="cross" @click.stop="removeItem(item._id)"></van-button>
       </template>
     </van-card>
-    <van-submit-bar :price="totalPrice" button-text="提交订单" @submit="onSubmit">
+    <van-submit-bar :price="totalPrice" button-text="提交订单">
       <van-checkbox v-model="checkAll">全选</van-checkbox>
       <template #tip>
         你的收货地址不支持同城送,
@@ -46,6 +48,7 @@
 <script>
 import Vue from "vue";
 import { Card, Step, Steps, SubmitBar, Stepper,Checkbox,CheckboxGroup } from "vant";
+import listt from '../views/mine/publist'
 
 Vue.use(Card);
 Vue.use(Step);
@@ -57,11 +60,15 @@ Vue.use(Stepper)
 
 export default {
   name: "Cart",
+  components: {
+    listt,
+  },
   data() {
     return {
       active: 0,
       // checkAll:false,
       selecteds:[],
+      isshow:'false'
     };
   },
   computed:{
@@ -96,8 +103,8 @@ export default {
     changeQty(id,qty){
       this.$store.commit('changeQty',{_id:id,qty})
     },
-    onClickRight(){
-
+    onClickRight() {
+      this.isshow = this.isshow == "false" ? "true" : "false";
     },
     gotoDetail(id){
       this.$router.push('/goods/'+id);
@@ -114,4 +121,7 @@ export default {
   .van-submit-bar{
     bottom:50px;
   }
+  .headerRight{
+  top:45px!important;
+}
 </style>
