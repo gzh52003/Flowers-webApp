@@ -170,7 +170,6 @@ export default {
       }
     },
     buyNow() {
-      
       this.add2cart();
       this.$router.push("/cart");
     }
