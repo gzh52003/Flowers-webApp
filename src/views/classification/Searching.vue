@@ -26,11 +26,11 @@
             
         </van-row>
         <van-row class="hot-tags" @click="typeText">
-            <van-col>爱情鲜花</van-col>
+            <van-col>音乐盒</van-col>
             <van-col>向日葵</van-col>
             <van-col>生日蛋糕</van-col>
-            <van-col>康乃馨</van-col>
-            <van-col>百合</van-col>
+            <van-col>玫瑰</van-col>
+            <van-col>巧克力</van-col>
             <van-col>满天星</van-col>
         </van-row>
         </div>
