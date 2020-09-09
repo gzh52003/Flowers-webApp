@@ -6,7 +6,7 @@ const common = {
             sub_title:'全网热销',
             price:'￥296',
             backgroud_url:'background-image:url(/img/fs1.jpg)',
-            mg_url:'https://img01.hua.com/uploadpic/newpic/9012452.jpg_220x240.jpg',
+            img_url:'https://img01.hua.com/uploadpic/newpic/9012452.jpg_220x240.jpg',
             fes_swiper:[{swiper_url:'https://img01.hua.com/uploadpic/newpic/9012452.jpg'},
             {swiper_url:'https://img01.hua.com/uploadpic/newpic/202004091616390990.jpg'},
             {swiper_url:'https://img01.hua.com/uploadpic/newpic/202004091616452946.jpg'},

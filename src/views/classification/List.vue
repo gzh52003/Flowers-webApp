@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 头部 -->
-    <van-nav-bar left-arrow @click-left="quit">
+    <van-nav-bar left-arrow @click-left="quit" class="handerRight">
       <template #title>
         <p v-show="searchShow" v-text="titleStr">爱情鲜花</p>
         <van-search
@@ -69,25 +69,25 @@
           </svg>
           <div class="menu-box" v-show="menuShow">
             <div class="menu-item">
-              <a href="#/home">
+              <a href="/home">
                 <van-icon name="wap-home-o"></van-icon>
                 <span>首页</span>
               </a>
             </div>
             <div class="menu-item">
-              <a href="#/classification">
+              <a href="/classification">
                 <van-icon name="apps-o"></van-icon>
                 <span>分类搜索</span>
               </a>
             </div>
             <div class="menu-item">
-              <a href="#/cart">
+              <a href="/cart">
                 <van-icon name="shopping-cart-o"></van-icon>
                 <span>购物车</span>
               </a>
             </div>
             <div class="menu-item">
-              <a href="#/mine">
+              <a href="/mine">
                 <van-icon name="smile-o"></van-icon>
                 <span>我的</span>
               </a>
@@ -143,7 +143,7 @@
             <van-grid :column-num="3">
               <van-grid-item
                 v-for="content in item.mudiArr"
-                :key="content.text"
+                :key="content.img_url"
                 class="purpose-layer-per"
                 :class="proupText===content.text ?'active':''"
                 :text="content.text"
@@ -160,14 +160,14 @@
     <section class="product">
       <van-grid :column-num="2" class="productList">
         <van-grid-item
-          v-for="item in goodsList"
-          :key="item.ItemCode"
+          v-for="(item,idx) in goodsList"
+          :key="idx"
           @click="goodsRouter(item.ItemCode)"
           :data-id="item.ItemCode"
           class="product-item"
         >
           <div class="product-item-pic">
-            <img v-lazy="item.img_url" />
+            <img v-lazy="'/img/'+item.ItemCode+'.jpg_220x240.jpg'" />
           </div>
           <div class="product-item-info">
             <div class="product-item-info-tages" v-show="item['tag_promo']">
@@ -185,7 +185,7 @@
           </div>
         </van-grid-item>
       </van-grid>
-      <div class="product-footer">
+      <div class="product-footer product-bottom">
         <van-loading size="16px" type="spinner" color="#1989fa" v-show="loadingShow">加载中...</van-loading>
         <p v-show="!loadingShow">已经到底了……</p>
       </div>
@@ -242,7 +242,7 @@ export default {
     goodsRouter($id) {
       this.$router.push({
         name: "Goods",
-        params: { id:$id },
+        params: { id: $id },
       });
     },
     onSearch() {
@@ -251,7 +251,6 @@ export default {
     },
     //商品请求
     async getGoodsList() {
-        
       let res;
       if (!this.searchShow) {
         res = await this.$request.get("/goods/search", {
@@ -262,11 +261,8 @@ export default {
           },
         });
       } else {
-      
-    
         res = await this.$request.post("/goods/list", {
-          itemcodes:this.goodsItem,
-         
+          itemcodes: this.goodsItem,
         });
       }
       //判断当前是重新搜索还是继续加载
@@ -296,39 +292,42 @@ export default {
       //去抖
       clearTimeout(this.falg);
       this.falg = setTimeout(() => {
-        //浏览器卷去的高度
-        const scrollTop =
-          document.documentElement.scrollTop || document.body.scrollTop;
-        //商品底部加载距离顶部的距离
-        const product_lastTop = document.querySelector(".product-footer")
-          .offsetTop;
-        //页面的高度
-        const innerHeight = window.innerHeight;
-        //当页面高度加上浏览器卷曲的高度大于商品底部距离顶部的高度，发起请求
-        if (scrollTop + innerHeight >= product_lastTop) {
-          this.loadingAjax = true;
-          this.ajaxPage++;
-          this.getGoodsList();
-        }
+          //浏览器卷去的高度
+          const scrollTop =
+            document.documentElement.scrollTop || document.body.scrollTop;
+          //商品底部加载距离顶部的距离
+          let product_lastTop = document.querySelector(".product-bottom");
+          if(!product_lastTop)return
+          product_lastTop = product_lastTop.offsetTop
+          //页面的高度
+          const innerHeight = window.innerHeight;
+          //当页面高度加上浏览器卷曲的高度大于商品底部距离顶部的高度，发起请求
+          if (scrollTop + innerHeight >= product_lastTop) {
+            this.loadingAjax = true;
+            this.ajaxPage++;
+            this.getGoodsList();
+          }
+   
       }, 200);
     },
     //综合
     comprehensive() {
       this.ajaxPage = 1;
       this.field = "";
-      this.getGoodsList()();
+      this.getGoodsList();
     },
     //销量
     salesVolume() {
-      this.goodsList = this.goodsList.sort((a, b) => {
-        return a.Sales - b.Sales;
-      });
+      this.goodsList = this.goodsList.sort((a, b) =>
+        a.Sales - b.Sales
+      );
     },
     //价格
     Price() {
       this.goodsList = this.goodsList.sort((a, b) => {
         return a.Price - b.Price;
       });
+      
     },
     newProducts() {},
     goal(str) {
@@ -340,11 +339,10 @@ export default {
   beforeRouteEnter(to, from, next) {
     if (from.path === "/searching") {
       window.searchShow = true;
-    } 
+    }
     next();
   },
   async created() {
-
     const { q, specificStr, index } = this.$route.query;
     if (q) {
       if (window.searchShow) {
@@ -354,12 +352,11 @@ export default {
       this.getGoodsList();
     }
     if (specificStr) {
-        
-            let strItem = ''
-          for(let i = 0; i < itemsArr[index - 0].length;i++){
-              strItem += ','+itemsArr[index - 0][i] 
-          }
-            strItem = strItem.substr(1)
+      let strItem = "";
+      for (let i = 0; i < itemsArr[index - 0].length; i++) {
+        strItem += "," + itemsArr[index - 0][i];
+      }
+      strItem = strItem.substr(1);
       this.proupList = categoryList[index - 0];
       this.goodsItem = strItem;
       this.titleStr = specificStr;
@@ -384,6 +381,8 @@ export default {
 };
 </script>
 <style lang="scss">
+.handerRight{
+
 .van-nav-bar__right {
   display: flex;
   width: 88px;
@@ -400,6 +399,7 @@ export default {
       width: 20px;
     }
   }
+}
 }
 .menu {
   position: relative;

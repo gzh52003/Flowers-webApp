@@ -51,9 +51,11 @@ Vue.use(Col);
 Vue.use(Row);
 Vue.use(Loading);
 Vue.use(Search);
+
 export default {
   data() {
     return {
+     
       menu: [
         {
           text: "首页",
@@ -92,22 +94,30 @@ export default {
     },
     addToVux() {
       let a = localStorage.getItem("goodslist");
-
-      this.$store.commit("pushstate", JSON.parse(a));
+      if (a.length > 0) {
+        this.$store.commit("pushstate", JSON.parse(a));
+      }
     },
     saveState() {
       let $this = this;
-      localStorage.setItem(
-        "state",
-        JSON.stringify($this.$store.state.userList)
-      );
+      let username = $this.$store.state.userList
+      if(username){
+
+        localStorage.setItem(
+          "state",
+          JSON.stringify(username)
+        );
+      }
     },
 
     readState() {
       let $this = this;
-      let bb = localStorage.getItem("state").substr(1);
-      bb = bb.substring(0, bb.length - 1);
-      $this.$store.state.userList = bb;
+      let bb = localStorage.getItem("state");
+      if(bb){
+        bb = bb.substr(1)
+        bb = bb.substring(0, bb.length - 1);
+        $this.$store.state.userList = bb;
+      }
     },
   },
   computed: {
@@ -116,11 +126,12 @@ export default {
     },
   },
   created() {
-    console.log(this.$store.state);
+    // this.addToVux();
     window.addEventListener("beforeunload", this.addToStorage);
     window.addEventListener("load", this.addToVux);
     window.addEventListener("beforeunload", this.saveState);
     window.addEventListener("load", this.readState);
+
   },
 };
 </script>

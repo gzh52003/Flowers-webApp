@@ -162,7 +162,6 @@ export default {
   },
   methods: {
     change(value) {
-      // console.log(value);
       this.$router.push(value);
     },
     onClickLeft() {
@@ -186,11 +185,9 @@ export default {
     //   // this.password = this.password === "password" ? "text" : "password";
     // },
     changepass() {
-      // console.log("a");
       this.passtype = this.passtype === "password" ? "text" : "password";
     },
     onClickRight() {
-      // console.log("asd");
       this.isshow = this.isshow == "false" ? "true" : "false";
     },
 
@@ -206,7 +203,6 @@ export default {
           password: password,
         })
         .then((res) => {
-          // console.log(res.data);
           if (res.data.msg == "success") {
             $this.setCookie(
               res.data.data.username,
@@ -215,10 +211,8 @@ export default {
             );
             $this.$store.commit("saveUserList", res.data.data.username);
 
-            // console.log($this.$store.state.userList);
 
             this.$router.push("/mine");
-            // console.log(res.data.data);username,authorization
           }
         });
     },

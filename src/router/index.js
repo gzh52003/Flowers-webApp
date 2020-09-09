@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  
   {
     path: '/',
     redirect: { name: 'Home' }
@@ -117,7 +118,8 @@ const routes = [
 
 
 const router = new VueRouter({
-  routes
+  mode:'history',
+  routes,
 })
 
 

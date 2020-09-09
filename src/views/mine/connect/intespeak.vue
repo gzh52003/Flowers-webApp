@@ -48,7 +48,6 @@ export default {
       this.$router.go(-1);
     },
     onClickRight() {
-      // console.log("asd");
       this.isshow = this.isshow == "false" ? "true" : "false";
     },
   },
@@ -57,7 +56,6 @@ export default {
   },
   created(){
     this.$store.commit("displayTabbar", false);
-    console.log(this.$store);
   },
   destroyed() {
     this.$store.commit("displayTabbar", true);

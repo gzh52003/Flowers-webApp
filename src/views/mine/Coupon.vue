@@ -85,14 +85,11 @@ export default {
     onChange(index) {
       this.showList = false;
       this.chosenCoupon = index;
-      console.log(index);
     },
-    onExchange(code) {
+    onExchange() {
       this.coupons.push(coupon);
-      console.log(code);
     },
     // showjuan() {
-    //   console.log("as");
     //   this.youshow = "true";
     // },
   },

@@ -16,7 +16,7 @@
       <van-card
       :price="item.sales_price"
       :title="item.Instro"
-      :thumb="item.img_url"
+      :thumb="'/img/'+item.ItemCode +'.jpg_220x240.jpg'"
       v-for="item in goodslist"
       :key="item._id"
       

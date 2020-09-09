@@ -91,7 +91,7 @@
             :origin-price="item.LinePrice"
             :desc="item.Instro"
             :title="item.Cpmc"
-            :thumb="item.img_url"
+            :thumb="'/img/'+item.ItemCode+'.jpg_220x240.jpg'"
             @click.stop="gotogoods(item.ItemCode)"
           >
             <template #tags>
@@ -123,7 +123,7 @@
             :origin-price="item.LinePrice"
             :desc="item.Instro"
             :title="item.Cpmc"
-            :thumb="item.img_url"
+            :thumb="'/img/'+item.ItemCode+'.jpg_220x240.jpg'"
             @click.stop="gotogoods(item.ItemCode)"
           >
             <template #tags>
@@ -151,7 +151,7 @@
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
             <van-grid-item class="recommendList"  v-for="recommed in recommendgoods1" :key="recommed._id" @click.stop="gotogoods(recommed.ItemCode)">
-              <img :src="recommed.img_url" alt="">
+              <img :src="'/img/'+recommed.ItemCode+'.jpg_220x240.jpg'" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
                 <p class="title">{{recommed.Instro}}</p>
@@ -176,7 +176,7 @@
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
             <van-grid-item class="recommendList"  v-for="recommed in recommendgoods2" :key="recommed.id" @click.stop="gotogoods(recommed.ItemCode)">
-              <img :src="recommed.img_url" alt="">
+              <img :src="'/img/'+recommed.ItemCode+'.jpg_220x240.jpg'" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
                 <p class="title">{{recommed.Instro}}</p>
@@ -200,7 +200,7 @@
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
             <van-grid-item class="recommendList"  v-for="recommed in recommendgoods3" :key="recommed._id" @click.stop="gotogoods(recommed.ItemCode)">
-              <img :src="recommed.img_url" alt="">
+              <img :src="'/img/'+recommed.ItemCode+'.jpg_220x240.jpg'" alt="">
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
                 <p class="title">{{recommed.Instro}}</p>
@@ -224,7 +224,7 @@
         <div class="product-list" >
           <van-grid :border="false" :column-num="2">
             <van-grid-item class="recommendList"  v-for="recommed in recommendgoods4" :key="recommed.id" @click.stop="gotogoods(recommed.ItemCode)">
-              <img :src="recommed.img_url" alt=""/>
+              <img :src="'/img/'+recommed.ItemCode+'.jpg_220x240.jpg'" alt=""/>
               <div class="recommendmsg">
                 <p><van-tag round plain type="warning" v-show="recommed.tag_promo!==''">{{recommed.tag_promo}}</van-tag></p>
                 <p class="title">{{recommed.Instro}}</p>
@@ -424,9 +424,7 @@ export default {
       }
     },
     gotogoods(title){
-      // console.log(this.$router);
       this.$router.push(`/goods/${title}`)
-      // console.log(title);
     },
     onClickLeft() {
       this.$router.push("/classification");
@@ -435,7 +433,6 @@ export default {
       this.$router.push("/contant");
     },
     gotoList(text,idx){
-      // console.log(11111,text,idx);
       this.$router.push({
         name:'List',
         query:{

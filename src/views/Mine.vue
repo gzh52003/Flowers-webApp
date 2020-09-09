@@ -260,7 +260,6 @@ export default {
         this.zhuangtai = localStorage.getItem("state").substr(1);
         this.zhuangtai = this.zhuangtai.substring(0, this.zhuangtai.length - 1);
         let auth = $this.getCookie(this.zhuangtai);
-        // console.log(auth);
         this.$request
           .get("http://120.24.63.27:2001/api/jwtverify", {
             params: {
@@ -268,9 +267,7 @@ export default {
             },
           })
           .then((res) => {
-            // console.log(res.data);
             if (res.data.msg == "success") {
-              // console.log("ff");
               this.$router.push(url);
             } else {
               this.$router.push("/reg");

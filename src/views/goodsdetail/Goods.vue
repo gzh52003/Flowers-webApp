@@ -15,7 +15,7 @@
     </van-nav-bar>
     <van-swipe class="my-swipe" @change="onChange">
       <van-swipe-item v-for="item in goodsswiper" :key="item.swiper_url" style="height:409px;">
-        <img :src="item.swiper_url" alt />
+        <img :src="'/img/'+goodsdetailmsg.ItemCode + '.jpg_220x240.jpg'" alt />
       </van-swipe-item>
       <template #indicator>
         <div class="custom-indicator">{{ current + 1 }}/4</div>
@@ -184,7 +184,6 @@ export default {
       this.goodsswiper = data[0].fes_swiper;
     }
     this.$store.commit("displayTabbar", false);
-    // console.log("source=", this.$request.source);
   },
   destroyed() {
     this.$store.commit("displayTabbar", true);
@@ -286,5 +285,16 @@ export default {
 }
 .headerRight{
   top:45px!important;
+}
+.price{
+  del::before{
+    content:'￥';
+  }
+  del{
+    margin-right:5px;
+  }
+  span::before{
+    content:'￥';
+  }
 }
 </style>

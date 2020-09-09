@@ -35,7 +35,6 @@ export default {
       this.$router.go(-1);
     },
     onClickRight() {
-      // console.log("asd");
       this.isshow = this.isshow == "false" ? "true" : "false";
     },
   },

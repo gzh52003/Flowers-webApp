@@ -12,7 +12,8 @@ const store = new Vuex.Store({
     },
       state: {
     userList: "",
-    order: 0
+    order: 0,
+   
   },
   mutations: {
     saveUserList(state, data) {
@@ -21,6 +22,9 @@ const store = new Vuex.Store({
     changeorder(state, data) {
       state.order = data
     },
+  setClass(state,data){
+    state.classStatus = data
+  }
   },
       actions: {
   

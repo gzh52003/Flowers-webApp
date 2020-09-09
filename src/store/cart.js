@@ -2,6 +2,8 @@
 // import request from '../utils/request'
 // import {Notify} from 'vant'
 
+    
+
 const cart = {
     state:{
         goodslist:[]
@@ -15,9 +17,9 @@ const cart = {
 
     // 定义修改state的事件
     mutations:{
-        initCart(state,data){
-            state.goodslist = data;
-        },
+        // initCart(state,data){
+        //     state.goodslist = data;
+        // },
         // 添加商品到购物车
         add(state,goods){
             state.goodslist.unshift(goods)
@@ -25,7 +27,6 @@ const cart = {
 
         // 修改数量
         changeQty(state,{_id,qty}){
-            console.log(_id,qty)
             state.goodslist = state.goodslist.map(item=>{
                 if(item._id === _id){
                     item.qty = qty;
@@ -33,7 +34,6 @@ const cart = {
                 return item;
             });
 
-            console.log(state.goodslist)
         },
 
         // 删除商品
@@ -51,6 +51,8 @@ const cart = {
     },
 
     actions:{
+        
+      
         // 根据库存数量来判断是否允许更改购物车商品数量
         // async changeQtyAsync(context,{_id,qty}){
         //     console.log('context=',context);
