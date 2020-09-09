@@ -126,13 +126,12 @@ export default {
     },
   },
   created() {
-    // this.addToVux();
     window.addEventListener("beforeunload", this.addToStorage);
     window.addEventListener("load", this.addToVux);
     window.addEventListener("beforeunload", this.saveState);
     window.addEventListener("load", this.readState);
 
-  },
+  },  
 };
 </script>
 
